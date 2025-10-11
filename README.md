@@ -23,3 +23,15 @@
 ```bash
 git clone https://github.com/yourusername/NomadNest.git
 cd NomadNest
+### 2. Install dependencies
+```bash
+npm install
+### 3. Start MongoDB
+Ensure that MongoDB is running locally at:
+mongodb://127.0.0.1:27017/nomadnest
+### 4. Run the application
+```bash
+node app.js
+The server will start at:
+http://localhost:8080
+
