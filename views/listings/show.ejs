@@ -1,35 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NomadNest</title>
-</head>
+<% layout("/layouts/boilerplate") %>
 
 <body>
-    <h3>Listing Details</h3>
-    <ul>
-        <li>Title: <%= listing.title %>
-        </li>
-        <li>Description: <%= listing.description %>
-        </li>
-        <li>Price: &#8377;<%= listing.price.toLocaleString() %>
-        </li>
-        <li>Location: <%= listing.location %>
-        </li>
-        <li>Country: <%= listing.country %>
-        </li>
-    </ul>
-    <br>
-    <a href="/listings/<%= listing._id %>/edit">Edit this listing</a>
-    <br>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
-        <button type="submit">Delete this listing</button>
-    </form>
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h3 class="mb-4 offset-1">Listing Details</h3>
 
-    <a href="/listings">Back to all listings</a>
-    <br>
+        <div class="card">
+          <!-- Image -->
+          <img src="<%= listing.image.url %>" alt="listing image" class="card-img-top show-img">
+
+          <div class="card-body">
+            <!-- Title -->
+            <h5 class="card-title">
+              <strong><%= listing.title %></strong>
+            </h5>
+
+            <!-- Description -->
+            <p class="card-text">
+              <strong>Description:</strong> <%= listing.description %>
+            </p>
+
+            <!-- Price -->
+            <p class="card-text">
+              <strong>Price:</strong> ₹<%= listing.price.toLocaleString() %>
+            </p>
+
+            <!-- Location -->
+            <p class="card-text">
+              <strong>Location:</strong> <%= listing.location %>
+            </p>
+
+            <!-- Country -->
+            <p class="card-text">
+              <strong>Country:</strong> <%= listing.country %>
+            </p>
+
+            <!-- Edit and Delete Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+              <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning">Edit this listing</a>
+              <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                <button type="submit" class="btn btn-danger">Delete this listing</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </body>
-
-</html>

@@ -1,0 +1,138 @@
+body {
+  font-family: "Plus Jakarta Sans", sans-serif  !important;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.container {
+    flex: 1;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+/* Navbar */
+.navbar {
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+/* Footer */
+
+.f-info-links a {
+  text-decoration: none;
+  color: #222222;
+}
+
+.f-info-links a:hover {
+  text-decoration: underline;
+}
+
+.f-info {
+  height: 8rem;
+  text-align: center;
+  background-color: #ebebeb;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: space-evenly;
+}
+
+.f-info-socials,
+.f-info-brand,
+.f-info-links {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- CARD STYLING ---------- */
+.card {
+    border: none;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Image */
+.card-img-top {
+    height: 15rem;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+/* Body */
+.card-body {
+    padding: 1rem;
+    text-align: left;
+}
+
+/* Title */
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Text */
+.card-text {
+    font-weight: 400;
+    color: #555;
+    margin-bottom: 0;
+    text-align: left;
+}
+.card-title {
+    text-align: left;
+}
+
+/* Optional subtle hover tint on image */
+.card-img-top:hover {
+    filter: brightness(0.95);
+    transition: filter 0.1s ease;
+}
+
+#listing-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* ---------- SHOW PAGE STYLING ---------- */
+#btn {
+    margin-top: 1rem;
+    background-color: #fe424d !important;
+    border: none !important;
+    color: white !important;
+}
+
+.show-img {
+    height: 30vh;
+    ;
+}

@@ -4,6 +4,7 @@ const app = express();
 const Listing = require("./models/listing");
 const path = require("path");
 const mongoose = require("mongoose");
+const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
 app.use(methodOverride("_method")); // looks for ?_method=PUT in form action
 
@@ -22,6 +23,8 @@ mongoose.connect(MONGO_URL, {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
+app.engine("ejs", ejsMate);
+app.use(express.static(path.join(__dirname, "public")));
 
 // Home route
 app.get("/", (req, res) => {
