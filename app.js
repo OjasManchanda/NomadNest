@@ -94,13 +94,32 @@ app.get("/listings/:id", async (req, res) => {
 app.put("/listings/:id", async (req, res) => {
     const { id } = req.params;
     try {
-        const updatedListing = await Listing.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
-        res.redirect(`/listings/${updatedListing._id}`);
+        const listing = await Listing.findById(id);
+
+        if (!listing) {
+            return res.status(404).send("Listing not found");
+        }
+
+        // Manually update fields to avoid overwriting nested objects
+        listing.title = req.body.listing.title;
+        listing.description = req.body.listing.description;
+        listing.price = req.body.listing.price;
+        listing.country = req.body.listing.country;
+        listing.location = req.body.listing.location;
+
+        // Only update image if provided
+        if (req.body.listing.image?.url) {
+            listing.image.url = req.body.listing.image.url;
+        }
+
+        await listing.save();
+        res.redirect(`/listings/${listing._id}`);
     } catch (err) {
         console.log(err);
         res.status(500).send("Error updating listing");
     }
 });
+
 
 // DELETE ROUTE
 app.delete("/listings/:id", async (req, res) => {
