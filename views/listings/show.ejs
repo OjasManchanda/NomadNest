@@ -23,7 +23,7 @@
 
             <!-- Price -->
             <p class="card-text">
-              <strong>Price:</strong> ₹<%= listing.price.toLocaleString() %>
+              <strong>Price:</strong> ₹<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %>
             </p>
 
             <!-- Location -->
