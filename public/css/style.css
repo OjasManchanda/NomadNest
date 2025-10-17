@@ -136,3 +136,48 @@ body {
     height: 30vh;
     ;
 }
+/* ---------- REVIEWS SECTION ---------- */
+
+.reviews-section {
+  margin-top: 2rem;
+}
+
+.review-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.review-author {
+  font-weight: 600;
+  color: #fe424d;
+  margin-bottom: 0.5rem;
+}
+
+.review-comment {
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 0.3rem;
+}
+
+.review-rating {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.review-rating strong {
+  color: #111;
+}
+
+.reviews-section h4 {
+  font-weight: 600;
+  color: #333;
+  border-left: 4px solid #fe424d;
+  padding-left: 0.6rem;
+}
