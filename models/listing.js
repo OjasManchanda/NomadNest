@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
-const review = require('./review');
-const { ref } = require('joi');
 const Schema = mongoose.Schema;
-const Review = require('./review');
+const Review = require('./review'); // only need this once
 
 const listingSchema = new Schema({  
-    title : {
+    title: {
         type: String,
         required: true,
     },
@@ -18,7 +16,10 @@ const listingSchema = new Schema({
         url: {
             type: String,
             default: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171",
-            set: (v) => v === "" ? "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171" : v
+            set: (v) =>
+                v === ""
+                    ? "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171"
+                    : v
         }
     },
     price: Number,
@@ -32,12 +33,11 @@ const listingSchema = new Schema({
     ]
 });
 
-listingSchema.post("findOneAndDelete", async function => {
-    if (listing) {
+// Middleware to delete all reviews if a listing is deleted
+listingSchema.post("findOneAndDelete", async function (doc) {
+    if (doc) {
         await Review.deleteMany({
-            _id: {
-                $in: listing.reviews
-            }
+            _id: { $in: doc.reviews }
         });
     }
 });
