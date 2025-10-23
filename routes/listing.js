@@ -1,20 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { listingSchema } = require("../schema");
-const ExpressError = require("../utils/ExpressError");
+
 const wrapAsync = require("../utils/wrapAsync");
 const Listing = require("../models/listing");
+const {isLoggedIn, isOwner, validateListing} = require("../middleware")
 
-// MIDDLEWARE — validate listing using Joi
-const validateListing = (req, res, next) => {
-    const { error } = listingSchema.validate(req.body);
-    if (error) {
-        const errMsg = error.details.map(el => el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    } else {
-        next();
-    }
-};
 
 // INDEX ROUTE — show all listings
 router.get("/", wrapAsync(async (req, res) => {
@@ -23,13 +13,14 @@ router.get("/", wrapAsync(async (req, res) => {
 }));
 
 // NEW ROUTE — form to create a new listing
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
     res.render("listings/new");
 });
 
 // CREATE ROUTE — actually create the listing
-router.post("/", validateListing, wrapAsync(async (req, res) => {
+router.post("/", validateListing, isLoggedIn,wrapAsync(async (req, res) => {
     const listing = new Listing(req.body.listing);
+    newListing.owner = req.user._id;
     await listing.save();
     console.log("New listing created:", listing);
     req.flash("success", "Successfully created a new listing!");
@@ -38,7 +29,13 @@ router.post("/", validateListing, wrapAsync(async (req, res) => {
 
 // SHOW ROUTE — show one listing
 router.get("/:id", wrapAsync(async (req, res) => {
-    const listing = await Listing.findById(req.params.id).populate("reviews");
+    const listing = await Listing.findById(req.params.id)
+    .populate({
+        path: "reviews",
+        populate: { path: "author" }  // nested populate for review authors
+    })
+    .populate("owner");  // populate the listing owner
+
     if (!listing) {
         req.flash("error", "Listing not found");
         res.redirect("/listings");
@@ -47,16 +44,15 @@ router.get("/:id", wrapAsync(async (req, res) => {
 }));
 
 // EDIT ROUTE — show edit form
-router.get("/:id/edit", wrapAsync(async (req, res) => {
+router.get("/:id/edit", isLoggedIn,isOwner,wrapAsync(async (req, res) => {
     const listing = await Listing.findById(req.params.id);
     if (!listing) throw new ExpressError(404, "Listing not found");
     res.render("listings/edit", { listing });
 }));
 
 // UPDATE ROUTE — handle edit form submission
-router.put("/:id", validateListing, wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const listing = await Listing.findById(id);
+router.put("/:id", validateListing, isLoggedIn,isOwner, wrapAsync(async (req, res) => {
+    
     if (!listing) throw new ExpressError(404, "Listing not found");
 
     // update basic fields
@@ -77,7 +73,7 @@ router.put("/:id", validateListing, wrapAsync(async (req, res) => {
 }));
 
 // DELETE ROUTE — remove a listing
-router.delete("/:id", wrapAsync(async (req, res) => {
+router.delete("/:id", isLoggedIn,isOwner, wrapAsync(async (req, res) => {
     const deletedListing = await Listing.findByIdAndDelete(req.params.id);
 
     if (!deletedListing) throw new ExpressError(404, "Listing not found");

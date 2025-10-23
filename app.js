@@ -13,10 +13,14 @@ const Review = require("./models/review");
 const cookieParser = require("cookie-parser");
 const connectFlash = require("connect-flash");
 const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user");
 
 // Importing Routes
 const reviewsRoutes = require("./routes/review");
 const listingsRoutes = require("./routes/listing");
+const userRoutes = require("./routes/user");
 
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
@@ -54,17 +58,48 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(connectFlash());
 
+app.use(passport.initialize());
+app.use(passport.session());//to know which user is logged in
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());//to store user in session
+passport.deserializeUser(User.deserializeUser());//to remove user from session
+
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
+    res.locals.currUser = req.user;
     next();
 });
+
+
+// app.get("/demoUser", async (req, res) => {
+//     const user = new User({ 
+//         email: "ojas.manchanda06@gmail.com",
+//         username: "ojasmanchanda",
+//     });
+
+//     let registeredUser = await User.register(user, "helloworld");
+//     res.send(registeredUser);
+// });
+
+
+
+
+
+
+
+
+
+
 
 //------------------------------LISTINGS----------------------------------------
 app.use("/listings", listingsRoutes);
 
 //-------------------------------REVIEWS----------------------------------------
 app.use("/listings/:id/reviews", reviewsRoutes);
+
+app.use("/", userRoutes);
 
 // 404 Handler
 app.all(/.*/, (req, res, next) => {
