@@ -54,15 +54,16 @@ module.exports.isOwner = async (req, res, next) => {
     }
     next();
 };
-module.exports.isReviewAuthor = async (req, res, next) => {
-    const { id, reviewId } = req.params;
-    const review = await Revi.findById(id);
 
-   
-    if (!review.author.equals(res.locals.currUser._id)) {
-        req.flash("error", "You are not the author of this review");
-        return res.redirect(`/listings/${id}`);
-    }
-    next();
+
+module.exports.isReviewAuthor = async (req, res, next) => {
+  const { id, reviewId } = req.params;
+  const review = await Review.findById(reviewId);
+  if (!review.author.equals(req.user._id)) {
+    req.flash("error", "You do not have permission to do that!");
+    return res.redirect(`/listings/${id}`);
+  }
+  next();
 };
+
 

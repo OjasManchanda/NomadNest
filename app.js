@@ -31,7 +31,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
 
-
 const MONGO_URL = "mongodb://127.0.0.1:27017/nomadnest";
 
 // Connect to MongoDB
