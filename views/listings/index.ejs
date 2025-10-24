@@ -1,105 +1,117 @@
 <% layout("/layouts/boilerplate") %>
 
-    <!-- <h2 class="text-center mb-4">All Listings</h2> -->
-    <% layout("/layouts/boilerplate") %>
 
-        <div class="filters-container d-flex flex-wrap align-items-center justify-content-between mb-4">
-            <div class="filters d-flex flex-wrap gap-3">
-                <div class="filter">
-                    <div><i class="fa-solid fa-fire"></i></div>
-                    <p>Trending</p>
-                </div>
-                <div class="filter">
-                    <div><i class="fa-solid fa-bed"></i></div>
-                    <p>Rooms</p>
-                </div>
-                <div class="filter">
-                    <div><i class="fa-solid fa-city"></i></div>
-                    <p>Iconic Cities</p>
-                </div>
-                <div class="filter">
-                    <div><i class="fa-solid fa-tree"></i></div>
-                    <p>Nature</p>
-                </div>
-                <div class="filter">
-                    <div><i class="fa-solid fa-umbrella-beach"></i></div>
-                    <p>Beaches</p>
-                </div>
-                <div class="filter">
-                    <div><i class="fa-solid fa-mountain"></i></div>
-                    <p>Mountains</p>
-                </div>
-                <div class="filter">
-                    <div><i class="fa-solid fa-person-swimming"></i></div>
-                    <p>Swimming Pools</p>
-                </div>
-                <div class="filter">
-                    <div><i class="fa-solid fa-chess-rook"></i></div>
-                    <p>Castles</p>
-                </div>
-                <div class="filter">
-                    <div><i class="fa-solid fa-campground"></i></div>
-                    <p>Camping</p>
-                </div>
-                
-                <div class="filter">
-                    <div><i class="fa-solid fa-skiing"></i></div>
-                    <p>Ski Resorts</p>
-                </div>
-                <div class="filter">
-                    <div><i class="fa-solid fa-wine-bottle"></i></div>
-                    <p>Vineyards</p>
-                </div>
+    <div class="filters-container d-flex flex-wrap align-items-center justify-content-between mb-4">
+        <div class="filters d-flex flex-wrap gap-3">
+            <div class="filter">
+                <div><i class="fa-solid fa-fire"></i></div>
+                <p>Trending</p>
             </div>
-
-            <!-- Tax Toggle -->
-            <div class="tax-toggle ms-3">
-                <div class="form-check-reverse form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">
-                        Display total after taxes
-                    </label>
-                </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <p>Rooms</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-city"></i></div>
+                <p>Iconic Cities</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-tree"></i></div>
+                <p>Nature</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-umbrella-beach"></i></div>
+                <p>Beaches</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <p>Mountains</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-person-swimming"></i></div>
+                <p>Swimming Pools</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-chess-rook"></i></div>
+                <p>Castles</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-campground"></i></div>
+                <p>Camping</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-skiing"></i></div>
+                <p>Ski Resorts</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-wine-bottle"></i></div>
+                <p>Vineyards</p>
             </div>
         </div>
 
-        <div class="row">
-            <% listings.forEach(listing=> { %>
-                <div class="col-md-4 mb-4 d-flex mt-3 justify-content-center">
-                    <a href="/listings/<%= listing._id %>" id="listing-link" class="text-decoration-none text-dark">
-                        <div class="card" style="width: 20rem;">
-                            <img class="card-img-top" src="<%= listing.image.url %>" alt="listing image">
-                            <div class="card-body text-center">
-                                <h4 class="card-title">
-                                    <%= listing.title %>
-                                </h4>
-                                <p class="card-text">
-                                    Price: &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %> /
-                                        night
-                                        <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
+        <!-- Tax Toggle -->
+        <div class="tax-toggle ms-3">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">
+                    Display total after taxes
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <% if (listings.length===0) { %>
+            <h4 class="text-center text-muted mt-5">No listings found.</h4>
+            <% } else { %>
+                <% listings.forEach(listing=> { %>
+                    <div class="col-md-4 mb-4 d-flex mt-3 justify-content-center">
+                        <a href="/listings/<%= listing._id %>" id="listing-link" class="text-decoration-none text-dark">
+                            <div class="card" style="width: 20rem;">
+                                <img class="card-img-top" src="<%= listing.image.url %>" alt="listing image">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <%= listing.title %>
+                                    </h4>
+                                    <p class="card-text">
+                                        &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %> /
+                                            night
+                                            <span class="tax-info"> &nbsp; &nbsp; +18% GST</span>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-                <% }) %>
-        </div>
-        <script>
-            // index.ejs — tax info toggle
-            document.addEventListener("DOMContentLoaded", () => {
-                const taxSwitch = document.getElementById("flexSwitchCheckDefault");
-                const taxInfo = document.getElementsByClassName("tax-info");
+                        </a>
+                    </div>
+                    <% }) %>
+                        <% } %>
+    </div>
 
-                if (taxSwitch) {
-                    taxSwitch.addEventListener("click", () => {
-                        for (let info of taxInfo) {
-                            if (info.style.display === "inline") {
-                                info.style.display = "none";
-                            } else {
-                                info.style.display = "inline";
-                            }
+
+    <script>
+        // index.ejs — tax info toggle
+        document.addEventListener("DOMContentLoaded", () => {
+            const taxSwitch = document.getElementById("flexSwitchCheckDefault");
+            const taxInfo = document.getElementsByClassName("tax-info");
+
+            if (taxSwitch) {
+                taxSwitch.addEventListener("click", () => {
+                    for (let info of taxInfo) {
+                        if (info.style.display === "inline") {
+                            info.style.display = "none";
+                        } else {
+                            info.style.display = "inline";
                         }
-                    });
-                }
-            });
+                    }
+                });
+            }
 
-        </script>
+            // Filter active state
+            const filters = document.querySelectorAll(".filter");
+            filters.forEach(filter => {
+                filter.addEventListener("click", function () {
+                    filters.forEach(f => f.classList.remove("active"));
+                    this.classList.add("active");
+                });
+            });
+        });
+    </script>

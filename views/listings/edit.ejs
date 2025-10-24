@@ -1,71 +1,133 @@
-<% layout('/layouts/boilerplate') %>
+<% layout("/layouts/boilerplate") %>
 
-    <body>
-        <div class="row mt-3">
-            <div class="col-8 offset-2">
-                <h3>Edit your Listing</h3>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      
+      <div style="margin-bottom: 2rem;">
+        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.5rem;">
+          Edit Listing
+        </h1>
+        <p style="color: var(--text-medium); font-size: 0.95rem;">
+          Update your listing details
+        </p>
+      </div>
 
-                <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate
-                    class="needs-validation" enctype="multipart/form-data">
-
-                    <!-- Title -->
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input id="title" name="listing[title]" value="<%= listing.title %>" type="text"
-                            class="form-control" required />
-                    </div>
-
-                    <!-- Description -->
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea id="description" name="listing[description]" class="form-control"
-                            required><%= listing.description %></textarea>
-                    </div>
-
-                    <!-- Image -->
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Upload New Image</label>
-                        <input id="image" name="listing[image]" type="file" class="form-control" />
-                        <% if (listing.image && listing.image.url) { %>
-                            <div class="mt-2">
-                                <p>Current Image:</p>
-                                <img src="<%= listing.image.url %>" alt="Current image" width="200"
-                                    class="rounded shadow-sm" />
-                            </div>
-                            <% } %>
-                    </div>
-                    <!-- Price  -->
-                    <div class="row">
-                        <div class="mb-3">
-                            <label for="price" class="form-label">Price</label>
-                            <input id="price" name="listing[price]" value="<%= listing.price %>" type="number"
-                                class="form-control" required />
-                        </div>
-
-                        <!-- Country -->
-                        <div class="mb-3">
-                            <label for="country" class="form-label">Country</label>
-                            <input id="country" name="listing[country]" value="<%= listing.country %>" type="text"
-                                class="form-control" required />
-                        </div>
-                    </div>
-
-
-
-                    <!-- Location -->
-                    <div class="mb-3">
-                        <label for="location" class="form-label">Location</label>
-                        <input id="location" name="listing[location]" value="<%= listing.location %>" type="text"
-                            class="form-control" required />
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="mb-3">
-                        <button type="submit" id="btn" class="btn btn-dark edit-btn mt-3">Update Listing</button>
-                    </div>
-
-                </form>
-            </div>
+      <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+        
+        <!-- Title -->
+        <div class="mb-4">
+          <label for="title" class="form-label">Title</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="title" 
+            name="listing[title]" 
+            value="<%= listing.title %>"
+            placeholder="e.g., Cozy Beachfront Villa"
+            required
+          >
+          <div class="invalid-feedback">Please provide a title.</div>
         </div>
-    </body>
-    <script src="/js/script.js"></script>
+
+        <!-- Description -->
+        <div class="mb-4">
+          <label for="description" class="form-label">Description</label>
+          <textarea 
+            class="form-control" 
+            id="description" 
+            name="listing[description]" 
+            rows="5"
+            placeholder="Describe your property..."
+            required
+          ><%= listing.description %></textarea>
+          <div class="invalid-feedback">Please provide a description.</div>
+        </div>
+
+        <!-- Image Upload -->
+        <div class="mb-4">
+          <label for="image" class="form-label">Update Image</label>
+          <input 
+            type="file" 
+            class="form-control" 
+            id="image" 
+            name="listing[image]"
+            accept="image/*"
+          >
+          <small style="color: var(--text-light); font-size: 0.85rem; display: block; margin-top: 0.5rem;">
+            Leave empty to keep current image
+          </small>
+          <% if (listing.image?.url) { %>
+            <img 
+              src="<%= listing.image.url %>" 
+              alt="Current image" 
+              style="width: 100%; max-width: 300px; height: auto; border-radius: var(--radius-md); margin-top: 1rem; object-fit: cover;"
+            >
+          <% } %>
+        </div>
+
+        <div class="row">
+          <!-- Price -->
+          <div class="col-md-6 mb-4">
+            <label for="price" class="form-label">Price (per night)</label>
+            <div class="input-group">
+              <span class="input-group-text" style="background: var(--bg-gray); border: 1px solid var(--border);">₹</span>
+              <input 
+                type="number" 
+                class="form-control" 
+                id="price" 
+                name="listing[price]" 
+                value="<%= listing.price %>"
+                min="0"
+                placeholder="5000"
+                required
+              >
+            </div>
+            <div class="invalid-feedback">Please provide a valid price.</div>
+          </div>
+
+          <!-- Country -->
+          <div class="col-md-6 mb-4">
+            <label for="country" class="form-label">Country</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="country" 
+              name="listing[country]" 
+              value="<%= listing.country %>"
+              placeholder="India"
+              required
+            >
+            <div class="invalid-feedback">Please provide a country.</div>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="mb-4">
+          <label for="location" class="form-label">Location</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="location" 
+            name="listing[location]" 
+            value="<%= listing.location %>"
+            placeholder="Goa, India"
+            required
+          >
+          <div class="invalid-feedback">Please provide a location.</div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex gap-3 mt-4 mb-5">
+          <button type="submit" class="btn btn-primary flex-grow-1">
+            <i class="fa-solid fa-floppy-disk me-2"></i>Update Listing
+          </button>
+          <a href="/listings/<%= listing._id %>" class="btn" style="background: var(--bg-gray); color: var(--text-dark); flex-grow-1;">
+            Cancel
+          </a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
