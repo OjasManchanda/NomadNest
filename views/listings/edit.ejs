@@ -5,7 +5,8 @@
             <div class="col-8 offset-2">
                 <h3>Edit your Listing</h3>
 
-                <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation">
+                <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate
+                    class="needs-validation" enctype="multipart/form-data">
 
                     <!-- Title -->
                     <div class="mb-3">
@@ -17,28 +18,35 @@
                     <!-- Description -->
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea id="description" name="listing[description]"
-                            class="form-control" required><%= listing.description %></textarea>
+                        <textarea id="description" name="listing[description]" class="form-control"
+                            required><%= listing.description %></textarea>
                     </div>
 
                     <!-- Image -->
                     <div class="mb-3">
-                        <label for="image" class="form-label">Image URL</label>
-                        <input id="image" name="listing[image][url]" value="<%= listing.image.url %>" type="text" class="form-control" />
-
+                        <label for="image" class="form-label">Upload New Image</label>
+                        <input id="image" name="listing[image]" type="file" class="form-control" />
+                        <% if (listing.image && listing.image.url) { %>
+                            <div class="mt-2">
+                                <p>Current Image:</p>
+                                <img src="<%= listing.image.url %>" alt="Current image" width="200"
+                                    class="rounded shadow-sm" />
+                            </div>
+                            <% } %>
                     </div>
+                    <!-- Price  -->
                     <div class="row">
                         <div class="mb-3">
                             <label for="price" class="form-label">Price</label>
                             <input id="price" name="listing[price]" value="<%= listing.price %>" type="number"
-                                class="form-control" required/>
+                                class="form-control" required />
                         </div>
 
                         <!-- Country -->
                         <div class="mb-3">
                             <label for="country" class="form-label">Country</label>
                             <input id="country" name="listing[country]" value="<%= listing.country %>" type="text"
-                                class="form-control" required/>
+                                class="form-control" required />
                         </div>
                     </div>
 
@@ -48,16 +56,16 @@
                     <div class="mb-3">
                         <label for="location" class="form-label">Location</label>
                         <input id="location" name="listing[location]" value="<%= listing.location %>" type="text"
-                            class="form-control" required/>
+                            class="form-control" required />
                     </div>
 
                     <!-- Submit Button -->
                     <div class="mb-3">
-                        <button type="submit"  id = "btn" class="btn btn-dark edit-btn mt-3">Update Listing</button>
+                        <button type="submit" id="btn" class="btn btn-dark edit-btn mt-3">Update Listing</button>
                     </div>
 
                 </form>
             </div>
         </div>
     </body>
-    <script src="/js/script.js"></script>   
+    <script src="/js/script.js"></script>
