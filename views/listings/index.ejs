@@ -1,111 +1,95 @@
 <% layout("/layouts/boilerplate") %>
 
+<% 
+// Default selectedCategory if not passed
+const currentCategory = typeof selectedCategory !== 'undefined' ? selectedCategory : ""; 
 
-    <div class="filters-container d-flex flex-wrap align-items-center justify-content-between mb-4">
-        <div class="filters d-flex flex-wrap gap-3">
-            <div class="filter">
-                <div><i class="fa-solid fa-fire"></i></div>
-                <p>Trending</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-bed"></i></div>
-                <p>Rooms</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-city"></i></div>
-                <p>Iconic Cities</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-tree"></i></div>
-                <p>Nature</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-umbrella-beach"></i></div>
-                <p>Beaches</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-mountain"></i></div>
-                <p>Mountains</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-person-swimming"></i></div>
-                <p>Swimming Pools</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-chess-rook"></i></div>
-                <p>Castles</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-campground"></i></div>
-                <p>Camping</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-skiing"></i></div>
-                <p>Ski Resorts</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-wine-bottle"></i></div>
-                <p>Vineyards</p>
-            </div>
-        </div>
+const catIcon = (cat) => {
+    switch(cat) {
+        case "Trending": return "fire";
+        case "Iconic Cities": return "city";
+        case "Nature": return "tree";
+        case "Beaches": return "umbrella-beach";
+        case "Mountains": return "mountain";
+        case "Swimming Pools": return "person-swimming";
+        case "Castles": return "chess-rook";
+        case "Camping": return "campground";
+        case "Ski Resorts": return "skiing";
+        case "Vineyards": return "wine-bottle";
+        default: return "circle";
+    }
+};
 
-        <!-- Tax Toggle -->
-        <div class="tax-toggle ms-3">
-            <div class="form-check-reverse form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">
-                    Display total after taxes
-                </label>
-            </div>
+const allCategories = ["Trending","Iconic Cities","Nature","Beaches","Mountains","Swimming Pools","Castles","Camping","Ski Resorts","Vineyards"];
+%>
+
+<div class="filters-container d-flex flex-wrap align-items-center justify-content-between mb-4">
+
+    <!-- CATEGORY FILTERS -->
+    <div class="filters d-flex flex-wrap gap-3">
+        <% allCategories.forEach(cat => { %>
+            <a href="/listings?category=<%= encodeURIComponent(cat) %>" 
+               class="filter <%= currentCategory === cat ? 'active' : '' %>">
+                <div><i class="fa-solid fa-<%= catIcon(cat) %>"></i></div>
+                <p><%= cat %></p>
+            </a>
+        <% }) %>
+    </div>
+
+    <!-- TAX TOGGLE -->
+    <div class="tax-toggle ms-3">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">
+                Display total after taxes
+            </label>
         </div>
     </div>
 
-    <div class="row">
-        <% if (listings.length===0) { %>
-            <h4 class="text-center text-muted mt-5">No listings found.</h4>
-            <% } else { %>
-                <% listings.forEach(listing=> { %>
-                    <div class="col-md-4 mb-4 d-flex mt-3 justify-content-center">
-                        <a href="/listings/<%= listing._id %>" id="listing-link" class="text-decoration-none text-dark">
-                            <div class="card" style="width: 20rem;">
-                                <img class="card-img-top" src="<%= listing.image.url %>" alt="listing image">
-                                <div class="card-body">
-                                    <h4 class="card-title">
-                                        <%= listing.title %>
-                                    </h4>
-                                    <p class="card-text">
-                                        &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %> /
-                                            night
-                                            <span class="tax-info"> &nbsp; &nbsp; +18% GST</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
+</div>
+
+<!-- LISTINGS -->
+<div class="row">
+    <% if (listings.length === 0) { %>
+        <h4 class="text-center text-muted mt-5">No listings found.</h4>
+    <% } else { %>
+        <% listings.forEach(listing => { %>
+            <div class="col-md-4 mb-4 d-flex mt-3 justify-content-center">
+                <a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark">
+                    <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="<%= listing.image.url %>" alt="listing image">
+                        <div class="card-body">
+                            <h4 class="card-title"><%= listing.title %></h4>
+                            <p class="card-text">
+                                &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %> / night
+                                <span class="tax-info">&nbsp;&nbsp;+18% GST</span>
+                            </p>
+                        </div>
                     </div>
-                    <% }) %>
-                        <% } %>
-    </div>
+                </a>
+            </div>
+        <% }) %>
+    <% } %>
+</div>
 
-
-    <script>
-        // index.ejs — tax info toggle
-        document.addEventListener("DOMContentLoaded", () => {
-            const taxSwitch = document.getElementById("flexSwitchCheckDefault");
-            const taxInfo = document.querySelectorAll(".tax-info");
-
-            if (taxSwitch) {
-                taxSwitch.addEventListener("change", () => { // 'change' is better than 'click'
-                    taxInfo.forEach(info => info.classList.toggle("show"));
-                });
-            }
-
-            // Filter active state
-            const filters = document.querySelectorAll(".filter");
-            filters.forEach(filter => {
-                filter.addEventListener("click", function () {
-                    filters.forEach(f => f.classList.remove("active"));
-                    this.classList.add("active");
-                });
-            });
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // TAX TOGGLE
+    const taxSwitch = document.getElementById("flexSwitchCheckDefault");
+    const taxInfo = document.querySelectorAll(".tax-info");
+    if (taxSwitch) {
+        taxSwitch.addEventListener("change", () => {
+            taxInfo.forEach(info => info.classList.toggle("show"));
         });
-    </script>
+    }
+
+    // FILTER ACTIVE STATE
+    const filters = document.querySelectorAll(".filter");
+    filters.forEach(filter => {
+        filter.addEventListener("click", function () {
+            filters.forEach(f => f.classList.remove("active"));
+            this.classList.add("active");
+        });
+    });
+});
+</script>

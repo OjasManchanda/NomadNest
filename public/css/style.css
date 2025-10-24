@@ -164,6 +164,19 @@ form[role="search"] .form-control::placeholder {
   gap: 4rem;
   flex-wrap: nowrap;
 }
+.filter {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.filter:hover {
+    transform: scale(1.05);
+}
 
 .filter {
   display: flex;
@@ -254,41 +267,59 @@ form[role="search"] .form-control::placeholder {
   border-color: var(--text-dark);
 }
 
-/* ==================== CARDS ==================== */
-.card {
-  border: none;
-  background: transparent;
-  transition: var(--transition);
-  margin-bottom: 2rem;
+/* ==================== LISTING CARDS ==================== */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  padding: 1.5rem 0;
 }
 
+/* Card Wrapper */
+.card {
+  border: none;
+  background: #fff;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Card Link */
 #listing-link {
   text-decoration: none;
   color: inherit;
   display: block;
 }
 
+/* Card Image */
 .card-img-top {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
-  border-radius: var(--radius-md);
-  transition: var(--transition);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  transition: transform 0.4s ease;
 }
 
 .card:hover .card-img-top {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
+/* Card Body */
 .card-body {
-  padding: 0.75rem 0;
+  padding: 1rem;
 }
 
 .card-title {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--text-dark);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -297,7 +328,7 @@ form[role="search"] .form-control::placeholder {
 .card-text {
   font-size: 0.9rem;
   color: var(--text-medium);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
 }
 
 .card-text strong {
@@ -305,12 +336,12 @@ form[role="search"] .form-control::placeholder {
   font-weight: 600;
 }
 
+/* Tax Info */
 .tax-info {
   font-size: 0.85rem;
   color: var(--text-light);
   font-weight: 400;
 }
-
 /* ==================== SHOW PAGE ==================== */
 .show-img {
   width: 100%;

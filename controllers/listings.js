@@ -2,11 +2,18 @@ const Listing = require("../models/listing");
 const ExpressError = require("../utils/ExpressError");
 const { cloudinary } = require("../cloudConfig");
 
-// SHOW ALL LISTINGS
+// SHOW ALL LISTINGS (with optional category filter)
 module.exports.index = async (req, res) => {
-    const listings = await Listing.find({});
-    res.render("listings/index", { listings });
+    const { category } = req.query; // get category from query string
+    let listings;
+    if (category) {
+        listings = await Listing.find({ categories: category }); // filter by category
+    } else {
+        listings = await Listing.find({});
+    }
+    res.render("listings/index", { listings, selectedCategory: category || null });
 };
+
 
 // RENDER NEW LISTING FORM
 module.exports.renderNewForm = (req, res) => {

@@ -1,114 +1,155 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
 
-      <!-- Listing Title -->
-      <h3 class="mb-4"><%= listing.title %></h3>
+        <!-- Listing Title -->
+        <h3 class="mb-4">
+          <%= listing.title %>
+        </h3>
 
-      <div class="card">
-        <!-- Listing Image -->
-        <img src="<%= listing.image?.url || 'https://via.placeholder.com/800x400' %>" 
-             alt="listing image" class="card-img-top show-img">
+        <div class="card">
+          <!-- Listing Image -->
+          <img src="<%= listing.image?.url || 'https://via.placeholder.com/800x400' %>" alt="listing image"
+            class="card-img-top show-img">
 
-        <div class="card-body">
-          <!-- Owner -->
-          <p class="text-muted"><i>Owned by <%= listing.owner?.username || "Unknown Host" %></i></p>
+          <div class="card-body">
+            <!-- Owner -->
+            <p class="text-muted"><i>Owned by <%= listing.owner?.username || "Unknown Host" %></i></p>
 
-          <!-- Description -->
-          <p><strong>Description:</strong> <%= listing.description %></p>
+            <!-- Description -->
+            <p><strong>Description:</strong>
+              <%= listing.description %>
+            </p>
 
-          <!-- Price -->
-          <p><strong>Price:</strong> ₹<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %></p>
+            <!-- Price -->
+            <p><strong>Price:</strong> ₹<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %>
+            </p>
 
-          <!-- Rooms -->
-          <p><strong>Rooms:</strong> <span class="badge bg-info text-dark"><%= listing.rooms || "N/A" %></span></p>
+            <!-- Rooms -->
+            <p><strong>Rooms:</strong> <span class="badge bg-info text-dark">
+                <%= listing.rooms || "N/A" %>
+              </span></p>
 
-          <!-- Categories -->
-          <p><strong>Categories:</strong>
-            <% if (listing.categories && listing.categories.length > 0) { %>
-              <% listing.categories.forEach(cat => { %>
-                <span class="badge bg-secondary me-1 mb-1"><%= cat %></span>
-              <% }) %>
-            <% } else { %>
-              N/A
-            <% } %>
-          </p>
+            <!-- Categories -->
+            <p><strong>Categories:</strong>
+              <% if (listing.categories && listing.categories.length> 0) { %>
+                <% listing.categories.forEach(cat=> { %>
+                  <span class="badge bg-secondary me-1 mb-1">
+                    <%= cat %>
+                  </span>
+                  <% }) %>
+                    <% } else { %>
+                      N/A
+                      <% } %>
+            </p>
 
-          <!-- Location & Country -->
-          <p><strong>Location:</strong> <%= listing.location %></p>
-          <p><strong>Country:</strong> <%= listing.country %></p>
+            <!-- Location & Country -->
+            <p><strong>Location:</strong>
+              <%= listing.location %>
+            </p>
+            <p><strong>Country:</strong>
+              <%= listing.country %>
+            </p>
 
-          <!-- Edit and Delete Buttons -->
-          <% if (currUser && currUser._id.equals(listing.owner?._id)) { %>
-            <div class="d-flex gap-2 mt-3">
-              <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning">Edit this listing</a>
-              <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
-                <button type="submit" class="btn btn-danger">Delete this listing</button>
-              </form>
-            </div>
-          <% } %>
-        </div>
-      </div>
-
-      <!-- Review Form -->
-      <% if (currUser) { %>
-        <div class="row justify-content-center mt-5">
-          <div class="col-md-12">
-            <h4>Leave a Review</h4>
-            <form id="reviewForm" method="POST" action="/listings/<%= listing._id %>/reviews" novalidate class="needs-validation">
-
-              <!-- Star Rating -->
-              <fieldset class="starability-slot mb-3">
-                <legend>Rating:</legend>
-                <% for(let i=1; i<=5; i++){ %>
-                  <input type="radio" id="rate<%= i %>" name="review[rating]" value="<%= i %>"/>
-                  <label for="rate<%= i %>" title="<%= i %> star"><%= i %> star</label>
-                <% } %>
-              </fieldset>
-
-              <!-- Comment -->
-              <div class="mb-3">
-                <label for="comment" class="form-label">Comments</label>
-                <textarea name="review[comment]" id="comment" rows="4" class="form-control" required></textarea>
-                <div class="invalid-feedback">Please add some comments before submitting.</div>
+            <!-- Edit and Delete Buttons -->
+            <% if (currUser && currUser._id.equals(listing.owner?._id)) { %>
+              <div class="d-flex gap-2 mt-3">
+                <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning">Edit this listing</a>
+                <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                  <button type="submit" class="btn btn-danger">Delete this listing</button>
+                </form>
               </div>
-
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+              <% } %>
           </div>
         </div>
-      <% } %>
+        <!-- Review Form -->
+        <% if (currUser) { %>
+          <div class="row justify-content-center mt-5">
+            <div class="col-md-12">
+              <h4>Leave a Review</h4>
+              <form id="reviewForm" method="POST" action="/listings/<%= listing._id %>/reviews" novalidate>
 
-      <hr>
+                <!-- Star Rating -->
+                <fieldset class="starability-slot mb-3">
+                  <legend>Rating:</legend>
+                  <% for(let i=1; i<=5; i++){ %>
+                    <input type="radio" id="rate<%= i %>" name="review[rating]" value="<%= i %>" />
+                    <label for="rate<%= i %>" title="<%= i %> star">
+                      <%= i %> star
+                    </label>
+                    <% } %>
 
-      <!-- Reviews Section -->
-      <div class="reviews-section mt-4">
-        <h4 class="mb-3">All Reviews</h4>
-        <div class="row g-3">
-          <% if (listing.reviews && listing.reviews.length > 0) { %>
-            <% listing.reviews.forEach(review => { %>
-              <div class="col-md-6">
-                <div class="p-3 border rounded shadow-sm">
-                  <h6 class="fw-bold">@<%= review.author?.username || "Anonymous" %></h6>
-                  <p><%= review.comment %></p>
-                  <p>Rating: <span class="badge bg-warning text-dark"><%= review.rating %> ⭐</span></p>
+                </fieldset>
 
-                  <% if(currUser && currUser._id.equals(review.author?._id)) { %>
-                    <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
-                      <button class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                  <% } %>
+                <!-- Comment -->
+                <div class="mb-3">
+                  <label for="comment" class="form-label">Comments (optional)</label>
+                  <textarea name="review[comment]" id="comment" rows="4" class="form-control"></textarea>
                 </div>
-              </div>
-            <% }) %>
-          <% } else { %>
-            <p class="text-muted">No reviews yet.</p>
-          <% } %>
-        </div>
-      </div>
 
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+          <% } %>
+
+            <hr>
+
+            <!-- Reviews Section -->
+            <div class="reviews-section mt-4">
+              <h4 class="mb-3">All Reviews</h4>
+              <div class="row g-3">
+                <% if (listing.reviews && listing.reviews.length> 0) { %>
+                  <% listing.reviews.forEach(review=> { %>
+                    <div class="col-md-6">
+                      <div class="p-3 border rounded shadow-sm">
+                        <!-- Add user icon next to username -->
+                        <h6 class="fw-bold">
+                          <i class="fa-solid fa-user me-2"></i>
+                          @<%= review.author?.username || "Anonymous" %>
+                        </h6>
+                        <p>
+                          <%= review.comment %>
+                        </p>
+                        <p>Rating: <span class="badge bg-warning text-dark">
+                            <%= review.rating %> ⭐
+                          </span></p>
+
+                        <% if(currUser && currUser._id.equals(review.author?._id)) { %>
+                          <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                            method="POST">
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                          </form>
+                          <% } %>
+                      </div>
+                    </div>
+                    <% }) %>
+                      <% } else { %>
+                        <p class="text-muted">No reviews yet.</p>
+                        <% } %>
+
+              </div>
+            </div>
+
+      </div>
     </div>
   </div>
-</div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const reviewForm = document.getElementById("reviewForm");
+      const ratingInputs = document.querySelectorAll('input[name="review[rating]"]');
+      const ratingError = document.getElementById("ratingError");
+
+      reviewForm.addEventListener("submit", (e) => {
+        const selectedRating = Array.from(ratingInputs).some(input => input.checked);
+        if (!selectedRating) {
+          e.preventDefault(); // Stop form submission
+          ratingError.style.display = "block";
+        } else {
+          ratingError.style.display = "none";
+        }
+      });
+    });
+  </script>
