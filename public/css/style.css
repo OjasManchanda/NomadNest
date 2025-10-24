@@ -273,3 +273,39 @@ form[role="search"] .form-control:focus {
   border-left: 4px solid #fe424d;
   padding-left: 0.6rem;
 }
+/* Footer */
+
+.f-info-links a {
+  text-decoration: none;
+  color: #222222;
+}
+
+.f-info-links a:hover {
+  text-decoration: underline;
+}
+
+.f-info {
+  height: 8rem;
+  text-align: center;
+  background-color: #ebebeb;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: space-evenly;
+}
+
+.f-info-socials,
+.f-info-brand,
+.f-info-links {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+.f-info-links a:hover {
+    text-decoration: underline;
+}

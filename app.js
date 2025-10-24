@@ -18,6 +18,7 @@ const Review = require("./models/review");
 const cookieParser = require("cookie-parser");
 const connectFlash = require("connect-flash");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
@@ -36,10 +37,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/nomadnest";
+
+const dbUrl = process.env.ATLASDB_URL;
+
 
 // Connect to MongoDB
-mongoose.connect(MONGO_URL)
+mongoose.connect(dbUrl)
     .then(() => console.log(" Connected to MongoDB"))
     .catch(err => console.log(" MongoDB connection error:", err));
 
@@ -47,9 +50,20 @@ mongoose.connect(MONGO_URL)
 app.get("/", (req, res) => {
     res.send("Welcome to NomadNest");
 });
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: process.env.SECRET
+    },
+    touchAfter: 24 * 60 * 60,
+});
+store.on("error", function (e) {
+    console.log("SESSION STORE ERROR", e);
+});
 
 const sessionOptions = {
-    secret: "mysupersecretcode",
+    store: store,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -58,6 +72,7 @@ const sessionOptions = {
         httpOnly: true,
     }
 }
+
 
 app.use(session(sessionOptions));
 app.use(connectFlash());
