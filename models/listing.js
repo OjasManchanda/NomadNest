@@ -1,50 +1,33 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Review = require('./review'); // only need this once
+const Review = require('./review');
 
 const listingSchema = new Schema({  
-    title: {
-        type: String,
-        required: true,
-    },
+    title: { type: String, required: true },
     description: String,
     image: {
-        filename: {
-            type: String,
-            default: "listingimage"
-        },
-        url: {
-            type: String,
-            default: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171",
-            set: (v) =>
-                v === ""
-                    ? "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171"
-                    : v
+        filename: { type: String, default: "listingimage" },
+        url: { 
+            type: String, 
+            default: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.1.0&auto=format&fit=crop&q=80&w=1171",
+            set: v => v === "" ? "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.1.0&auto=format&fit=crop&q=80&w=1171" : v
         }
     },
     price: Number,
     location: String,
     country: String,
-    reviews: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Review',
-        }
-    ],
-    owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-    }
+    rooms: Number,                 // number of rooms
+    categories: [{ type: String }], // array of categories
+    reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
+    owner: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
-// Middleware to delete all reviews if a listing is deleted
-listingSchema.post("findOneAndDelete", async function (doc) {
+// Delete all associated reviews when a listing is deleted
+listingSchema.post("findOneAndDelete", async function(doc) {
     if (doc) {
-        await Review.deleteMany({
-            _id: { $in: doc.reviews }
-        });
+        await Review.deleteMany({ _id: { $in: doc.reviews } });
     }
 });
 
-const Listing = mongoose.model('Listing', listingSchema);
-module.exports = Listing;
+const Listing = mongoose.model("Listing", listingSchema);
+module.exports = Listing;  // <-- MAKE SURE THIS LINE EXISTS

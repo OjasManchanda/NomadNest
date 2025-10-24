@@ -91,17 +91,11 @@
         // index.ejs — tax info toggle
         document.addEventListener("DOMContentLoaded", () => {
             const taxSwitch = document.getElementById("flexSwitchCheckDefault");
-            const taxInfo = document.getElementsByClassName("tax-info");
+            const taxInfo = document.querySelectorAll(".tax-info");
 
             if (taxSwitch) {
-                taxSwitch.addEventListener("click", () => {
-                    for (let info of taxInfo) {
-                        if (info.style.display === "inline") {
-                            info.style.display = "none";
-                        } else {
-                            info.style.display = "inline";
-                        }
-                    }
+                taxSwitch.addEventListener("change", () => { // 'change' is better than 'click'
+                    taxInfo.forEach(info => info.classList.toggle("show"));
                 });
             }
 

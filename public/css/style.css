@@ -89,13 +89,13 @@ body {
 form[role="search"] {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 50px;
   padding: 0.25rem;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
+  width: 100%;
 }
 
 form[role="search"]:hover {
@@ -103,6 +103,7 @@ form[role="search"]:hover {
 }
 
 form[role="search"] .form-control {
+  flex: 1; /* take up all available space */
   border: none;
   background: transparent;
   padding: 0.5rem 1rem;
@@ -111,7 +112,6 @@ form[role="search"] .form-control {
   outline: none;
   box-shadow: none;
 }
-
 form[role="search"] .form-control::placeholder {
   color: var(--text-light);
 }
@@ -120,19 +120,19 @@ form[role="search"] .form-control::placeholder {
   background-color: var(--primary);
   color: white;
   border: none;
-  border-radius: 70px !important; /* smoother pill shape instead of full circle */
-  padding: 0.5rem 1rem; /* adds space for text and icon */
+  border-radius: 70px !important;
+  padding: 0.5rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem; /* spacing between icon and text */
+  gap: 0.5rem;
   font-weight: 600;
   font-size: 0.9rem;
   transition: var(--transition);
   cursor: pointer;
   flex-shrink: 0;
+  margin-right: 0.25rem; /* small gap from the edge */
 }
-
 
 .btn-search:hover {
   background-color: var(--primary-dark);
@@ -213,6 +213,14 @@ form[role="search"] .form-control::placeholder {
   white-space: nowrap;
   flex-shrink: 0;
   transition: var(--transition);
+}
+
+.tax-info {
+  display: none; 
+}
+
+.tax-info.show {
+  display: inline; 
 }
 
 .tax-toggle:hover {

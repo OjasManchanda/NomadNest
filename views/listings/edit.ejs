@@ -3,118 +3,86 @@
 <div class="container mt-4">
   <div class="row justify-content-center">
     <div class="col-lg-6 col-md-8">
-      
-      <div style="margin-bottom: 2rem;">
-        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.5rem;">
-          Edit Listing
-        </h1>
-        <p style="color: var(--text-medium); font-size: 0.95rem;">
-          Update your listing details
-        </p>
+
+      <div class="mb-4">
+        <h1 class="h3 fw-bold text-dark">Edit Listing</h1>
+        <p class="text-secondary small">Update your listing details</p>
       </div>
 
       <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
-        
+
         <!-- Title -->
-        <div class="mb-4">
+        <div class="mb-3">
           <label for="title" class="form-label">Title</label>
-          <input 
-            type="text" 
-            class="form-control" 
-            id="title" 
-            name="listing[title]" 
-            value="<%= listing.title %>"
-            placeholder="e.g., Cozy Beachfront Villa"
-            required
-          >
+          <input type="text" class="form-control" id="title" name="listing[title]" value="<%= listing.title %>"
+            placeholder="e.g., Cozy Beachfront Villa" required>
           <div class="invalid-feedback">Please provide a title.</div>
         </div>
 
         <!-- Description -->
-        <div class="mb-4">
+        <div class="mb-3">
           <label for="description" class="form-label">Description</label>
-          <textarea 
-            class="form-control" 
-            id="description" 
-            name="listing[description]" 
-            rows="5"
-            placeholder="Describe your property..."
-            required
-          ><%= listing.description %></textarea>
+          <textarea class="form-control" id="description" name="listing[description]" rows="5"
+            placeholder="Describe your property..." required><%= listing.description %></textarea>
           <div class="invalid-feedback">Please provide a description.</div>
         </div>
 
         <!-- Image Upload -->
-        <div class="mb-4">
+        <div class="mb-3">
           <label for="image" class="form-label">Update Image</label>
-          <input 
-            type="file" 
-            class="form-control" 
-            id="image" 
-            name="listing[image]"
-            accept="image/*"
-          >
-          <small style="color: var(--text-light); font-size: 0.85rem; display: block; margin-top: 0.5rem;">
-            Leave empty to keep current image
-          </small>
+          <input type="file" class="form-control" id="image" name="listing[image]" accept="image/*">
+          <small class="text-muted d-block mt-1">Leave empty to keep current image</small>
           <% if (listing.image?.url) { %>
-            <img 
-              src="<%= listing.image.url %>" 
-              alt="Current image" 
-              style="width: 100%; max-width: 300px; height: auto; border-radius: var(--radius-md); margin-top: 1rem; object-fit: cover;"
-            >
+            <img src="<%= listing.image.url %>" alt="Current image" class="img-fluid rounded mt-2" style="max-width: 300px; object-fit: cover;">
           <% } %>
         </div>
 
         <div class="row">
           <!-- Price -->
-          <div class="col-md-6 mb-4">
+          <div class="col-md-6 mb-3">
             <label for="price" class="form-label">Price (per night)</label>
             <div class="input-group">
-              <span class="input-group-text" style="background: var(--bg-gray); border: 1px solid var(--border);">₹</span>
-              <input 
-                type="number" 
-                class="form-control" 
-                id="price" 
-                name="listing[price]" 
-                value="<%= listing.price %>"
-                min="0"
-                placeholder="5000"
-                required
-              >
+              <span class="input-group-text">₹</span>
+              <input type="number" class="form-control" id="price" name="listing[price]" value="<%= listing.price %>" min="0" placeholder="5000" required>
             </div>
             <div class="invalid-feedback">Please provide a valid price.</div>
           </div>
 
-          <!-- Country -->
-          <div class="col-md-6 mb-4">
-            <label for="country" class="form-label">Country</label>
-            <input 
-              type="text" 
-              class="form-control" 
-              id="country" 
-              name="listing[country]" 
-              value="<%= listing.country %>"
-              placeholder="India"
-              required
-            >
-            <div class="invalid-feedback">Please provide a country.</div>
+          <!-- Rooms -->
+          <div class="col-md-6 mb-3">
+            <label for="rooms" class="form-label">Number of Rooms</label>
+            <input type="number" class="form-control" id="rooms" name="listing[rooms]" value="<%= listing.rooms %>" min="1" required>
+            <div class="invalid-feedback">Please provide number of rooms.</div>
           </div>
         </div>
 
+        <!-- Country -->
+        <div class="mb-3">
+          <label for="country" class="form-label">Country</label>
+          <input type="text" class="form-control" id="country" name="listing[country]" value="<%= listing.country %>" placeholder="India" required>
+          <div class="invalid-feedback">Please provide a country.</div>
+        </div>
+
         <!-- Location -->
-        <div class="mb-4">
+        <div class="mb-3">
           <label for="location" class="form-label">Location</label>
-          <input 
-            type="text" 
-            class="form-control" 
-            id="location" 
-            name="listing[location]" 
-            value="<%= listing.location %>"
-            placeholder="Goa, India"
-            required
-          >
+          <input type="text" class="form-control" id="location" name="listing[location]" value="<%= listing.location %>" placeholder="Goa, India" required>
           <div class="invalid-feedback">Please provide a location.</div>
+        </div>
+
+        <!-- Categories -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Categories</label>
+          <div class="d-flex flex-wrap gap-2">
+            <% const allCategories=["Trending","Rooms","Iconic Cities","Nature","Beaches","Mountains","Swimming Pools","Castles","Camping","Ski Resorts","Vineyards"]; %>
+            <% allCategories.forEach(cat => { %>
+              <div class="form-check form-check-inline">
+                <input class="btn-check" type="checkbox" name="listing[categories][]" id="cat-<%= cat.replace(/\s+/g,'') %>" value="<%= cat %>"
+                  <%= listing.categories.includes(cat) ? "checked" : "" %>>
+                <label class="btn btn-outline-dark btn-sm" for="cat-<%= cat.replace(/\s+/g,'') %>"><%= cat %></label>
+              </div>
+            <% }) %>
+          </div>
         </div>
 
         <!-- Buttons -->
@@ -122,9 +90,7 @@
           <button type="submit" class="btn btn-primary flex-grow-1">
             <i class="fa-solid fa-floppy-disk me-2"></i>Update Listing
           </button>
-          <a href="/listings/<%= listing._id %>" class="btn" style="background: var(--bg-gray); color: var(--text-dark); flex-grow-1;">
-            Cancel
-          </a>
+          <a href="/listings/<%= listing._id %>" class="btn btn-secondary flex-grow-1">Cancel</a>
         </div>
 
       </form>

@@ -24,7 +24,7 @@
           <!-- Image -->
           <div class="mb-3">
             <label for="image" class="form-label">Upload Listing Image</label>
-            <input id="image" name="listing[image]"  type="file" class="form-control" required/>
+            <input id="image" name="listing[image]" type="file" class="form-control" required />
           </div>
 
           <div class="row">
@@ -43,6 +43,28 @@
               <input id="country" name="listing[country]" placeholder="India" type="text" class="form-control"
                 required />
               <div class="invalid-feedback">Country name should be valid!</div>
+            </div>
+          </div>
+          <!-- Rooms -->
+          <div class="mb-3">
+            <label for="rooms" class="form-label">Number of Rooms</label>
+            <input type="number" class="form-control" id="rooms" name="listing[rooms]" placeholder="2" min="1" required>
+          </div>
+
+          <!-- Categories -->
+          <div class="mb-3">
+            <label class="form-label fw-bold">Categories</label>
+            <div class="d-flex flex-wrap gap-2">
+              <% const allCategories=["Trending","Rooms","Iconic Cities","Nature","Beaches","Mountains","Swimming Pools","Castles","Camping","Ski Resorts","Vineyards"]; %>
+                <% allCategories.forEach(cat=> { %>
+                  <div class="form-check form-check-inline">
+                    <input class="btn-check" type="checkbox" name="listing[categories][]"
+                      id="cat-<%= cat.replace(/\s+/g,'') %>" value="<%= cat %>">
+                    <label class="btn btn-outline-dark btn-sm" for="cat-<%= cat.replace(/\s+/g,'') %>">
+                      <%= cat %>
+                    </label>
+                  </div>
+                  <% }) %>
             </div>
           </div>
 
