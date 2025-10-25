@@ -48,7 +48,7 @@ mongoose.connect(dbUrl)
 
 // Home route
 app.get("/", (req, res) => {
-    res.send("Welcome to NomadNest");
+    res.redirect("/listings");
 });
 const store = MongoStore.create({
     mongoUrl: dbUrl,
