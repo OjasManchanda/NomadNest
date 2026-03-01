@@ -64,6 +64,25 @@
               <% } %>
           </div>
         </div>
+
+        <!-- Map Section -->
+        <div class="card mt-4">
+          <div class="card-body p-0">
+            <h5 class="px-4 pt-4 pb-3 mb-0">
+              <i class="fa-solid fa-location-dot me-2 text-danger"></i>
+              Where you'll be
+            </h5>
+            <div id="map" style="height: 400px; width: 100%; border-radius: 0 0 12px 12px; background-color: #f7f7f7; position: relative;">
+              <div id="map-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 1000;">
+                <div class="spinner-border text-danger" role="status">
+                  <span class="visually-hidden">Loading map...</span>
+                </div>
+                <p class="mt-2 text-muted">Loading map...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Review Form -->
         <% if (currUser) { %>
           <div class="row justify-content-center mt-5">
@@ -71,7 +90,7 @@
               <h4>Leave a Review</h4>
               <form id="reviewForm" method="POST" action="/listings/<%= listing._id %>/reviews" novalidate>
 
-                <!-- Star Rating -->
+                
                 <fieldset class="starability-slot mb-3">
                   <legend>Rating:</legend>
                   <% for(let i=1; i<=5; i++){ %>
@@ -83,7 +102,7 @@
 
                 </fieldset>
 
-                <!-- Comment -->
+               
                 <div class="mb-3">
                   <label for="comment" class="form-label">Comments (optional)</label>
                   <textarea name="review[comment]" id="comment" rows="4" class="form-control"></textarea>
@@ -105,7 +124,7 @@
                   <% listing.reviews.forEach(review=> { %>
                     <div class="col-md-6">
                       <div class="p-3 border rounded shadow-sm">
-                        <!-- Add user icon next to username -->
+                        
                         <h6 class="fw-bold">
                           <i class="fa-solid fa-user me-2"></i>
                           @<%= review.author?.username || "Anonymous" %>
@@ -136,6 +155,121 @@
       </div>
     </div>
   </div>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script>
+    // Wait for DOM and Leaflet to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if Leaflet is loaded
+      if (typeof L === 'undefined') {
+        console.error('Leaflet library not loaded');
+        document.getElementById('map-loading').innerHTML = '<p class="text-danger">Failed to load map library</p>';
+        return;
+      }
+
+      // Initialize Map
+      const mapElement = document.getElementById('map');
+      const loadingElement = document.getElementById('map-loading');
+      
+      if (!mapElement) {
+        console.error('Map element not found');
+        return;
+      }
+
+      try {
+        const map = L.map('map', {
+          center: [20, 0],
+          zoom: 2,
+          scrollWheelZoom: true
+        });
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          maxZoom: 19
+        }).addTo(map);
+
+        // Hide loading spinner once tiles start loading
+        map.on('load', function() {
+          if (loadingElement) {
+            loadingElement.style.display = 'none';
+          }
+        });
+
+        // Geocode the location
+        const location = "<%= listing.location %>, <%= listing.country %>";
+        
+        // Using Nominatim for geocoding (free OpenStreetMap service)
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`)
+          .then(response => response.json())
+          .then(data => {
+            // Hide loading spinner
+            if (loadingElement) {
+              loadingElement.style.display = 'none';
+            }
+
+            if (data && data.length > 0) {
+              const lat = parseFloat(data[0].lat);
+              const lon = parseFloat(data[0].lon);
+              
+              // Set map view to the location
+              map.setView([lat, lon], 13);
+              
+              // Add a marker with custom icon
+              const customIcon = L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background-color: #ff385c; width: 40px; height: 40px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-home" style="color: white; transform: rotate(45deg); font-size: 16px;"></i></div>',
+                iconSize: [40, 40],
+                iconAnchor: [20, 40]
+              });
+              
+              L.marker([lat, lon], { icon: customIcon })
+                .addTo(map)
+                .bindPopup(`<strong><%= listing.title %></strong><br>${location}`)
+                .openPopup();
+              
+              // Add a circle to show approximate area
+              L.circle([lat, lon], {
+                color: '#ff385c',
+                fillColor: '#ff385c',
+                fillOpacity: 0.1,
+                radius: 500
+              }).addTo(map);
+            } else {
+              // Default to a general location if geocoding fails
+              console.log('Location not found, using default view');
+              map.setView([20, 0], 2);
+            }
+          })
+          .catch(error => {
+            console.error('Geocoding error:', error);
+            if (loadingElement) {
+              loadingElement.style.display = 'none';
+            }
+            map.setView([20, 0], 2);
+          });
+
+        // Fix map display issue
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 100);
+
+      } catch (error) {
+        console.error('Map initialization error:', error);
+        if (loadingElement) {
+          loadingElement.innerHTML = '<p class="text-danger">Failed to initialize map</p>';
+        }
+      }
+    });
+  </script>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const reviewForm = document.getElementById("reviewForm");

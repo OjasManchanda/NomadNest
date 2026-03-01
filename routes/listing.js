@@ -14,7 +14,7 @@ const listingController = require("../controllers/listings");
 router.get("/", wrapAsync(listingController.index));
 
 
-// ✅ SEARCH ROUTE — must come before /:id
+// SEARCH ROUTE — must come before /:id
 router.get("/search", async (req, res) => {
   try {
     const query = req.query.q?.trim();
