@@ -1,0 +1,227 @@
+<% layout('/layouts/boilerplate') %>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      
+      <!-- Success Alert -->
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fa-solid fa-circle-check me-2"></i>
+        <strong>Booking Confirmed!</strong> Your reservation has been successfully created.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+
+      <div class="row">
+        <!-- Booking Details -->
+        <div class="col-lg-8">
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0">
+                <i class="fa-solid fa-calendar-check me-2"></i>
+                Booking Confirmation
+              </h5>
+            </div>
+            <div class="card-body">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <p class="mb-2"><strong>Booking ID:</strong></p>
+                  <p class="text-muted">#<%= booking._id.toString().slice(-8).toUpperCase() %></p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                  <span class="badge bg-success fs-6 px-3 py-2">
+                    <i class="fa-solid fa-check-circle me-1"></i>
+                    <%= booking.bookingStatus.toUpperCase() %>
+                  </span>
+                </div>
+              </div>
+
+              <hr>
+
+              <!-- Property Info -->
+              <div class="mb-4">
+                <h6 class="text-primary mb-3">
+                  <i class="fa-solid fa-home me-2"></i>Property Details
+                </h6>
+                <div class="d-flex align-items-center">
+                  <img src="<%= booking.listing.image.url %>" 
+                       alt="<%= booking.listing.title %>" 
+                       class="rounded me-3"
+                       style="width: 100px; height: 100px; object-fit: cover;">
+                  <div>
+                    <h5 class="mb-1"><%= booking.listing.title %></h5>
+                    <p class="text-muted mb-1">
+                      <i class="fa-solid fa-location-dot me-1"></i>
+                      <%= booking.listing.location %>, <%= booking.listing.country %>
+                    </p>
+                    <a href="/listings/<%= booking.listing._id %>" class="btn btn-sm btn-outline-primary">
+                      View Property
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <hr>
+
+              <!-- Stay Details -->
+              <div class="mb-4">
+                <h6 class="text-primary mb-3">
+                  <i class="fa-solid fa-calendar me-2"></i>Stay Details
+                </h6>
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <p class="mb-1 text-muted small">CHECK-IN</p>
+                    <p class="mb-0 fw-bold">
+                      <%= booking.checkInDate.toLocaleDateString('en-US', { 
+                        weekday: 'short', 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                      }) %>
+                    </p>
+                    <small class="text-muted">After 2:00 PM</small>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <p class="mb-1 text-muted small">CHECK-OUT</p>
+                    <p class="mb-0 fw-bold">
+                      <%= booking.checkOutDate.toLocaleDateString('en-US', { 
+                        weekday: 'short', 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                      }) %>
+                    </p>
+                    <small class="text-muted">Before 11:00 AM</small>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <p class="mb-1 text-muted small">GUESTS</p>
+                    <p class="mb-0 fw-bold">
+                      <i class="fa-solid fa-users me-1"></i>
+                      <%= booking.guests %> <%= booking.guests === 1 ? 'Guest' : 'Guests' %>
+                    </p>
+                    <small class="text-muted"><%= booking.numberOfNights %> nights</small>
+                  </div>
+                </div>
+              </div>
+
+              <hr>
+
+              <!-- Price Breakdown -->
+              <div class="mb-4">
+                <h6 class="text-primary mb-3">
+                  <i class="fa-solid fa-receipt me-2"></i>Price Breakdown
+                </h6>
+                <div class="price-details">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>₹<%= booking.listing.price.toLocaleString("en-IN") %> × <%= booking.numberOfNights %> nights</span>
+                    <span>₹<%= booking.basePrice.toLocaleString("en-IN") %></span>
+                  </div>
+                  
+                  <% if (booking.weekendSurcharge > 0) { %>
+                    <div class="d-flex justify-content-between mb-2">
+                      <span class="text-muted">Weekend surcharge</span>
+                      <span>+₹<%= booking.weekendSurcharge.toLocaleString("en-IN") %></span>
+                    </div>
+                  <% } %>
+                  
+                  <% if (booking.seasonalAdjustment > 0) { %>
+                    <div class="d-flex justify-content-between mb-2">
+                      <span class="text-muted">Seasonal adjustment</span>
+                      <span>+₹<%= booking.seasonalAdjustment.toLocaleString("en-IN") %></span>
+                    </div>
+                  <% } %>
+                  
+                  <% if (booking.discountAmount > 0) { %>
+                    <div class="d-flex justify-content-between mb-2 text-success">
+                      <span>Discount (<%= booking.discountType %>)</span>
+                      <span>-₹<%= booking.discountAmount.toLocaleString("en-IN") %></span>
+                    </div>
+                  <% } %>
+                  
+                  <% if (booking.insuranceAdded) { %>
+                    <div class="d-flex justify-content-between mb-2">
+                      <span class="text-muted">Travel insurance</span>
+                      <span>+₹<%= booking.insuranceAmount.toLocaleString("en-IN") %></span>
+                    </div>
+                  <% } %>
+                  
+                  <hr>
+                  
+                  <div class="d-flex justify-content-between">
+                    <strong class="fs-5">Total (INR)</strong>
+                    <strong class="fs-5 text-primary">₹<%= booking.totalPrice.toLocaleString("en-IN") %></strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payment Status -->
+              <div class="alert alert-success mb-0">
+                <i class="fa-solid fa-check-circle me-2"></i>
+                <strong>Payment Confirmed</strong> - Your booking is fully paid.
+              </div>
+            </div>
+          </div>
+
+          <!-- Cancellation Policy -->
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h6 class="text-primary mb-3">
+                <i class="fa-solid fa-shield-halved me-2"></i>Cancellation Policy
+              </h6>
+              <% 
+                const policy = booking.refundPolicy;
+                let policyText = '';
+                
+                if (policy === 'flexible') {
+                  policyText = 'Free cancellation for 24 hours. Cancel before check-in for a full refund.';
+                } else if (policy === 'moderate') {
+                  policyText = 'Cancel 5+ days before check-in for a 50% refund.';
+                } else {
+                  policyText = 'Cancel 7+ days before check-in for a 50% refund.';
+                }
+              %>
+              <p class="mb-3"><%= policyText %></p>
+              
+              <% if (booking.bookingStatus === 'confirmed') { %>
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">
+                  <i class="fa-solid fa-xmark me-2"></i>Cancel Booking
+                </button>
+              <% } %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+          <!-- Host Info -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-body text-center">
+              <i class="fa-solid fa-user-circle fa-4x text-primary mb-3"></i>
+              <h6>Hosted by</h6>
+              <p class="mb-0 fw-bold"><%= booking.listing.owner.username %></p>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h6 class="mb-3">Quick Actions</h6>
+              <div class="d-grid gap-2">
+                <a href="/bookings" class="btn btn-outline-primary">
+                  <i class="fa-solid fa-list me-2"></i>My Bookings
+                </a>
+                <a href="/listings" class="btn btn-outline-secondary">
+                  <i class="fa-solid fa-search me-2"></i>Browse More
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cancel Booking Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div cl

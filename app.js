@@ -27,6 +27,7 @@ const User = require("./models/user");
 const reviewsRoutes = require("./routes/review");
 const listingsRoutes = require("./routes/listing");
 const userRoutes = require("./routes/user");
+const bookingRoutes = require("./routes/booking");
 
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
@@ -103,13 +104,17 @@ app.use((req, res, next) => {
 // });
 
 
+//-------------------------------USERS------------------------------------------
+app.use("/", userRoutes);
+
+//-------------------------------BOOKINGS---------------------------------------
+app.use("/", bookingRoutes);
+
 //------------------------------LISTINGS----------------------------------------
 app.use("/listings", listingsRoutes);
 
 //-------------------------------REVIEWS----------------------------------------
 app.use("/listings/:id/reviews", reviewsRoutes);
-
-app.use("/", userRoutes);
 
 // 404 Handler
 app.all(/.*/, (req, res, next) => {

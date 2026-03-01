@@ -16,10 +16,35 @@ const listingSchema = new Schema({
     price: Number,
     location: String,
     country: String,
-    rooms: Number,                 // number of rooms
-    categories: [{ type: String }], // array of categories
+    rooms: Number,
+    categories: [{ type: String }],
     reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
-    owner: { type: Schema.Types.ObjectId, ref: 'User' }
+    owner: { type: Schema.Types.ObjectId, ref: 'User' },
+    
+    // Booking-related fields
+    maxGuests: { 
+        type: Number, 
+        default: 4,
+        min: 1 
+    },
+    instantBooking: { 
+        type: Boolean, 
+        default: false 
+    },
+    refundPolicy: {
+        type: String,
+        enum: ['flexible', 'moderate', 'strict'],
+        default: 'moderate'
+    },
+    minimumStay: {
+        type: Number,
+        default: 1,
+        min: 1
+    },
+    maximumStay: {
+        type: Number,
+        default: 90
+    }
 });
 
 // Delete all associated reviews when a listing is deleted

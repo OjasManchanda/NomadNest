@@ -1,0 +1,200 @@
+<% layout('/layouts/boilerplate') %>
+
+<div class="container mt-4">
+  <h2 class="mb-4">
+    <i class="fa-solid fa-calendar-check me-2"></i>My Bookings
+  </h2>
+  
+  <% if (bookings.length === 0) { %>
+    <div class="text-center py-5">
+      <i class="fa-solid fa-calendar-xmark fa-4x text-muted mb-3"></i>
+      <h4 class="text-muted">No bookings yet</h4>
+      <p class="text-muted">Start exploring amazing places to stay!</p>
+      <a href="/listings" class="btn btn-primary mt-3">
+        <i class="fa-solid fa-search me-2"></i>Browse Listings
+      </a>
+    </div>
+  <% } else { %>
+    <!-- Filter Tabs -->
+    <ul class="nav nav-tabs mb-4" id="bookingTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button">
+          All Bookings
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button">
+          Upcoming
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="past-tab" data-bs-toggle="tab" data-bs-target="#past" type="button">
+          Past
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="bookingTabsContent">
+      <!-- All Bookings -->
+      <div class="tab-pane fade show active" id="all">
+        <div class="row">
+          <% bookings.forEach(booking => { %>
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card h-100 shadow-sm booking-card">
+                <img src="<%= booking.listing.image.url %>" 
+                     class="card-img-top" 
+                     alt="<%= booking.listing.title %>"
+                     style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                  <h5 class="card-title"><%= booking.listing.title %></h5>
+                  <p class="card-text text-muted small mb-2">
+                    <i class="fa-solid fa-location-dot me-1"></i>
+                    <%= booking.listing.location %>
+                  </p>
+                  
+                  <div class="mb-2">
+                    <small class="text-muted">
+                      <i class="fa-solid fa-calendar me-1"></i>
+                      <%= booking.checkInDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) %> - 
+                      <%= booking.checkOutDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %>
+                    </small>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <span class="badge bg-<%= booking.bookingStatus === 'confirmed' ? 'success' : booking.bookingStatus === 'cancelled' ? 'danger' : 'warning' %>">
+                      <%= booking.bookingStatus.toUpperCase() %>
+                    </span>
+                  </div>
+                  
+                  <div class="d-flex justify-content-between align-items-center">
+                    <strong class="text-primary">₹<%= booking.totalPrice.toLocaleString("en-IN") %></strong>
+                    <a href="/bookings/<%= booking._id %>" class="btn btn-sm btn-primary">
+                      View Details
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <!-- Upcoming Bookings -->
+      <div class="tab-pane fade" id="upcoming">
+        <div class="row">
+          <% 
+            const upcomingBookings = bookings.filter(b => 
+              new Date(b.checkInDate) > new Date() && b.bookingStatus === 'confirmed'
+            );
+          %>
+          <% if (upcomingBookings.length === 0) { %>
+            <div class="col-12 text-center py-5">
+              <p class="text-muted">No upcoming bookings</p>
+            </div>
+          <% } else { %>
+            <% upcomingBookings.forEach(booking => { %>
+              <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm booking-card">
+                  <img src="<%= booking.listing.image.url %>" 
+                       class="card-img-top" 
+                       alt="<%= booking.listing.title %>"
+                       style="height: 200px; object-fit: cover;">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= booking.listing.title %></h5>
+                    <p class="card-text text-muted small mb-2">
+                      <i class="fa-solid fa-location-dot me-1"></i>
+                      <%= booking.listing.location %>
+                    </p>
+                    
+                    <div class="mb-2">
+                      <small class="text-muted">
+                        <i class="fa-solid fa-calendar me-1"></i>
+                        <%= booking.checkInDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) %> - 
+                        <%= booking.checkOutDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %>
+                      </small>
+                    </div>
+                    
+                    <div class="mb-3">
+                      <span class="badge bg-success">CONFIRMED</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                      <strong class="text-primary">₹<%= booking.totalPrice.toLocaleString("en-IN") %></strong>
+                      <a href="/bookings/<%= booking._id %>" class="btn btn-sm btn-primary">
+                        View Details
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- Past Bookings -->
+      <div class="tab-pane fade" id="past">
+        <div class="row">
+          <% 
+            const pastBookings = bookings.filter(b => 
+              new Date(b.checkOutDate) < new Date()
+            );
+          %>
+          <% if (pastBookings.length === 0) { %>
+            <div class="col-12 text-center py-5">
+              <p class="text-muted">No past bookings</p>
+            </div>
+          <% } else { %>
+            <% pastBookings.forEach(booking => { %>
+              <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm booking-card">
+                  <img src="<%= booking.listing.image.url %>" 
+                       class="card-img-top" 
+                       alt="<%= booking.listing.title %>"
+                       style="height: 200px; object-fit: cover;">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= booking.listing.title %></h5>
+                    <p class="card-text text-muted small mb-2">
+                      <i class="fa-solid fa-location-dot me-1"></i>
+                      <%= booking.listing.location %>
+                    </p>
+                    
+                    <div class="mb-2">
+                      <small class="text-muted">
+                        <i class="fa-solid fa-calendar me-1"></i>
+                        <%= booking.checkInDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) %> - 
+                        <%= booking.checkOutDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %>
+                      </small>
+                    </div>
+                    
+                    <div class="mb-3">
+                      <span class="badge bg-secondary">COMPLETED</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                      <strong class="text-primary">₹<%= booking.totalPrice.toLocaleString("en-IN") %></strong>
+                      <a href="/bookings/<%= booking._id %>" class="btn btn-sm btn-outline-primary">
+                        View Details
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<style>
+  .booking-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .booking-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+  }
+</style>
