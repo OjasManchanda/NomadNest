@@ -42,6 +42,7 @@
                 <h6 class="text-primary mb-3">
                   <i class="fa-solid fa-home me-2"></i>Property Details
                 </h6>
+                <% if (booking.listing && booking.listing.image) { %>
                 <div class="d-flex align-items-center">
                   <img src="<%= booking.listing.image.url %>" 
                        alt="<%= booking.listing.title %>" 
@@ -58,6 +59,12 @@
                     </a>
                   </div>
                 </div>
+                <% } else { %>
+                <div class="alert alert-warning">
+                  <i class="fa-solid fa-exclamation-triangle me-2"></i>
+                  Property information is no longer available.
+                </div>
+                <% } %>
               </div>
 
               <hr>
@@ -197,7 +204,11 @@
             <div class="card-body text-center">
               <i class="fa-solid fa-user-circle fa-4x text-primary mb-3"></i>
               <h6>Hosted by</h6>
-              <p class="mb-0 fw-bold"><%= booking.listing.owner.username %></p>
+              <% if (booking.listing && booking.listing.owner) { %>
+                <p class="mb-0 fw-bold"><%= booking.listing.owner.username %></p>
+              <% } else { %>
+                <p class="mb-0 text-muted">Host information unavailable</p>
+              <% } %>
             </div>
           </div>
 

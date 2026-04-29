@@ -2,6 +2,7 @@ const Booking = require('../models/booking');
 const Listing = require('../models/listing');
 const { calculateBookingPrice } = require('../utils/pricingCalculator');
 const { processRefund, calculateRefundAmount } = require('../utils/refundCalculator');
+const { sendBookingEmail } = require('../utils/sendEmail');
 const ExpressError = require('../utils/ExpressError');
 
 // CREATE BOOKING
@@ -9,8 +10,8 @@ module.exports.createBooking = async (req, res) => {
     const { listingId } = req.params;
     const { checkInDate, checkOutDate, guests, insuranceAdded, specialRequests } = req.body;
     
-    // Find listing
-    const listing = await Listing.findById(listingId);
+    // Find listing and populate owner for email
+    const listing = await Listing.findById(listingId).populate('owner');
     if (!listing) {
         throw new ExpressError(404, 'Listing not found');
     }
@@ -82,7 +83,23 @@ module.exports.createBooking = async (req, res) => {
     
     await booking.save();
     
-    req.flash('success', 'Booking confirmed! Enjoy your stay.');
+    // ✉️ SEND BOOKING CONFIRMATION EMAIL
+    // This runs asynchronously and won't break the booking flow if it fails
+    if (req.user.email) {
+        sendBookingEmail(req.user.email, booking, listing)
+            .then(result => {
+                if (result.success) {
+                    console.log('📧 Email sent to:', req.user.email);
+                }
+            })
+            .catch(err => {
+                console.error('📧 Email sending failed (non-critical):', err.message);
+            });
+    } else {
+        console.log('⚠️ User email not found, skipping email notification');
+    }
+    
+    req.flash('success', 'Booking confirmed! Check your email for details.');
     res.redirect(`/bookings/${booking._id}`);
 };
 
@@ -99,7 +116,24 @@ module.exports.showBooking = async (req, res) => {
         .populate('splitPayments.user');
     
     if (!booking) {
-        throw new ExpressError(404, 'Booking not found');
+        req.flash('error', 'Booking not found');
+        return res.redirect('/bookings');
+    }
+    
+    // Check if required data is populated
+    if (!booking.user) {
+        req.flash('error', 'Booking user data is missing');
+        return res.redirect('/bookings');
+    }
+    
+    if (!booking.listing) {
+        req.flash('error', 'Booking listing data is missing');
+        return res.redirect('/bookings');
+    }
+    
+    if (!booking.listing.owner) {
+        req.flash('error', 'Listing owner data is missing');
+        return res.redirect('/bookings');
     }
     
     // Check authorization
@@ -107,7 +141,8 @@ module.exports.showBooking = async (req, res) => {
     const isListingOwner = booking.listing.owner._id.equals(req.user._id);
     
     if (!isBookingUser && !isListingOwner) {
-        throw new ExpressError(403, 'You do not have permission to view this booking');
+        req.flash('error', 'You do not have permission to view this booking');
+        return res.redirect('/bookings');
     }
     
     res.render('bookings/show', { booking });

@@ -16,7 +16,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 7,
     maximumStay: 90,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Modern Loft in Downtown Manhattan",
@@ -32,7 +32,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 60,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Overwater Villa in Maldives",
@@ -48,7 +48,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 5,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Private Island Retreat Fiji",
@@ -64,7 +64,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 7,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Desert Oasis in Dubai",
@@ -80,7 +80,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 3,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
 
   // ─── ICONIC CITIES ───────────────────────────────────────────────────────────
@@ -98,7 +98,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Modern Apartment in Tokyo",
@@ -114,7 +114,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 90,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Art Deco Apartment in Miami",
@@ -130,7 +130,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Historic Brownstone in Boston",
@@ -146,7 +146,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 60,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Luxury Riad in Marrakech",
@@ -162,7 +162,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Eiffel Tower View Apartment",
@@ -178,7 +178,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 60,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Colosseum View Terrace Apartment",
@@ -194,7 +194,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Heritage Mansion in Havana",
@@ -210,7 +210,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Penthouse Suite in Singapore",
@@ -226,7 +226,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 3,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
 
   // ─── NATURE ──────────────────────────────────────────────────────────────────
@@ -244,7 +244,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 2,
     maximumStay: 45,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Secluded Treehouse Getaway",
@@ -260,7 +260,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 1,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Eco-Friendly Treehouse in Costa Rica",
@@ -276,7 +276,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Rustic Log Cabin in Montana",
@@ -292,7 +292,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Safari Lodge in the Serengeti",
@@ -308,7 +308,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 3,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Rainforest Villa in Borneo",
@@ -324,7 +324,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Hobbit-Style Earth House in New Zealand",
@@ -340,7 +340,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Northern Lights Glass Cabin in Finland",
@@ -356,7 +356,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 3,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
 
   // ─── BEACHES ─────────────────────────────────────────────────────────────────
@@ -374,7 +374,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Beachfront Paradise Villa in Cancun",
@@ -390,7 +390,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Beachfront Bungalow in Bali",
@@ -406,7 +406,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 3,
     maximumStay: 90,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Beachfront Villa in Mykonos",
@@ -422,7 +422,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 4,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Secluded Beach House in Costa Rica",
@@ -438,7 +438,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 3,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Cliffside Villa in Amalfi Coast",
@@ -454,7 +454,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 5,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Zanzibar Beachfront Lodge",
@@ -470,7 +470,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 3,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Overwater Bungalow in Bora Bora",
@@ -486,7 +486,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 5,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
 
   // ─── MOUNTAINS ───────────────────────────────────────────────────────────────
@@ -504,7 +504,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 2,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Alpine Chalet in Swiss Alps",
@@ -520,7 +520,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 5,
     maximumStay: 60,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Mountain Lodge in the Himalayas",
@@ -536,7 +536,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 2,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Rocky Mountain Retreat Colorado",
@@ -552,7 +552,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 2,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Mountain Cabin in Smoky Mountains",
@@ -568,7 +568,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Andean Hacienda in Cusco",
@@ -584,7 +584,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Atlas Mountain Kasbah",
@@ -600,7 +600,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
 
   // ─── SWIMMING POOLS ───────────────────────────────────────────────────────────
@@ -618,7 +618,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 5,
     maximumStay: 60,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Modern Villa with Private Pool in Ibiza",
@@ -634,7 +634,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 4,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Luxury Estate with Olympic Pool in Beverly Hills",
@@ -650,7 +650,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 7,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Mediterranean Villa with Pool in Santorini",
@@ -666,7 +666,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 5,
     maximumStay: 45,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Desert Retreat with Pool Oasis in Scottsdale",
@@ -682,7 +682,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 60,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Luxury Pool Villa in Ubud",
@@ -698,7 +698,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Infinity Pool Penthouse in Cape Town",
@@ -714,7 +714,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 4,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
 
   // ─── CASTLES ─────────────────────────────────────────────────────────────────
@@ -732,7 +732,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 7,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Medieval Castle in Loire Valley",
@@ -748,7 +748,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 7,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Irish Castle Estate in County Cork",
@@ -764,7 +764,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 5,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "German Castle with Alpine Views",
@@ -780,7 +780,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 5,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "English Manor Castle in the Cotswolds",
@@ -796,7 +796,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 4,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Czech Baroque Castle in Bohemia",
@@ -812,7 +812,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 3,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Portuguese Quinta Palace",
@@ -828,7 +828,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 5,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
 
   // ─── CAMPING ─────────────────────────────────────────────────────────────────
@@ -846,7 +846,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 10,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "A-Frame Cabin in Big Sur",
@@ -862,7 +862,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 1,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Yurt in the Montana Wilderness",
@@ -878,7 +878,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Riverside Camping Pod in Lake District",
@@ -894,7 +894,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 1,
     maximumStay: 7,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Desert Camping in Wadi Rum",
@@ -910,7 +910,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 1,
     maximumStay: 5,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Geodesic Dome in Patagonia",
@@ -926,7 +926,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 3,
     maximumStay: 10,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Lakeside Canvas Lodge in Canada",
@@ -942,7 +942,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
 
   // ─── SKI RESORTS ─────────────────────────────────────────────────────────────
@@ -960,7 +960,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 7,
     maximumStay: 60,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Luxury Ski Chalet in Aspen",
@@ -976,7 +976,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 7,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Alpine Ski Lodge in Chamonix",
@@ -992,7 +992,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 5,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Modern Ski Apartment in Whistler",
@@ -1008,7 +1008,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 4,
     maximumStay: 45,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Japanese Ski Resort Ryokan in Niseko",
@@ -1024,7 +1024,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Ski Chalet in Courchevel",
@@ -1040,7 +1040,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 7,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Luxury Ski Lodge in Queenstown",
@@ -1056,7 +1056,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 4,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
 
   // ─── VINEYARDS ────────────────────────────────────────────────────────────────
@@ -1074,7 +1074,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 5,
     maximumStay: 90,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Napa Valley Wine Estate",
@@ -1090,7 +1090,7 @@ const sampleListings = [
     refundPolicy: "strict",
     minimumStay: 3,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Provence Vineyard Farmhouse",
@@ -1106,7 +1106,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 4,
     maximumStay: 60,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Spanish Vineyard Retreat in Rioja",
@@ -1122,7 +1122,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 45,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "South African Wine Farm in Stellenbosch",
@@ -1138,7 +1138,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 3,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Argentine Vineyard Estancia in Mendoza",
@@ -1154,7 +1154,7 @@ const sampleListings = [
     refundPolicy: "moderate",
     minimumStay: 4,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "New Zealand Vineyard Cottage in Marlborough",
@@ -1170,7 +1170,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 3,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
 
   // ─── ROOMS ────────────────────────────────────────────────────────────────────
@@ -1188,7 +1188,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Cozy Studio in Trastevere, Rome",
@@ -1204,7 +1204,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Private Room in Haveli, Jaipur",
@@ -1220,7 +1220,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 1,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Garden Suite in Cape Malay Quarter",
@@ -1236,7 +1236,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Treehouse Room in Chiang Mai",
@@ -1252,7 +1252,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 1,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Historic Room in Medina, Fez",
@@ -1268,7 +1268,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 1,
     maximumStay: 14,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Converted Barn Room in Tuscany",
@@ -1284,7 +1284,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 21,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Guesthouse Room in Petra",
@@ -1300,7 +1300,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 1,
     maximumStay: 10,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Houseboat Room in Alleppey",
@@ -1316,7 +1316,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 1,
     maximumStay: 7,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
   {
     title: "Private Room in a Buenos Aires Palacio",
@@ -1332,7 +1332,7 @@ const sampleListings = [
     refundPolicy: "flexible",
     minimumStay: 2,
     maximumStay: 30,
-    owner: "68f9fa6c7dc2f3eab246d675",
+    owner: "69f1b2db304dd212eb97efd9",
   },
 ];
 
