@@ -1,263 +1,402 @@
-<h1 align="center">🏡 WanderLust (NomadNest)</h1>
+# WanderLust (NomadNest)
 
-<p align="center">
-  <b>WanderLust</b> is a feature-rich, full-stack Airbnb-like booking platform built with <b>Node.js</b>, <b>Express</b>, <b>MongoDB</b>, and <b>EJS</b>.  
-  It provides a complete property rental experience with advanced booking system, dynamic pricing, interactive maps, reviews, and modern UI/UX.
-</p>
+A full-stack property rental platform built with Node.js, Express, MongoDB, and EJS. This application replicates core Airbnb functionality with features including user authentication, property listings, advanced booking system with dynamic pricing, reviews, and interactive maps.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js">
-  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express">
-  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB">
-  <img src="https://img.shields.io/badge/Passport-34E27A?style=for-the-badge&logo=passport&logoColor=white" alt="Passport">
-</p>
+**Live Demo:** [https://nomadnest-alun.onrender.com/listings](https://nomadnest-alun.onrender.com/listings)
 
 ---
 
-## ✨ Key Features
+## Table of Contents
 
-### 🔐 User Authentication & Authorization
-- Secure registration and login with Passport.js
-- Session management with express-session
-- Owner-based authorization for listings
-- Protected routes and flash messages
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Installation](#installation)
+- [Environment Variables](#environment-variables)
+- [Database Seeding](#database-seeding)
+- [Project Structure](#project-structure)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Security](#security)
+- [Contributing](#contributing)
+- [License](#license)
 
-### 🏠 Property Management
-- Full CRUD operations for listings
-- 10 property categories (Trending, Iconic Cities, Nature, Beaches, Mountains, Swimming Pools, Castles, Camping, Ski Resorts, Vineyards)
-- Image upload via Cloudinary
-- Advanced search and category filtering
-- Detailed property information (rooms, max guests, policies)
+---
 
-### 📅 Comprehensive Booking System
-- **Interactive Calendar Widget** - Always-visible calendar with date selection
-- **Visual Availability** - Booked dates shown in grey and unclickable
-- **Dynamic Pricing Engine:**
-  - Weekend surcharge (+20%)
-  - Seasonal pricing (+15%)
-  - Early bird discount (-10% for 30+ days advance)
-  - Last-minute discount (-15% within 3 days)
-  - Long-term stay discount (-25% for 28+ nights)
-  - Travel insurance option (+5%)
-- **Real-time Price Calculator** - Live breakdown of all charges
-- **Instant Booking** - Auto-confirmation with payment tracking
-- **Refund Policies** - Flexible, Moderate, and Strict options
-- **Split Payment Support** - Share costs with multiple participants
+## Features
 
-### ⭐ Review System
-- Star rating (1-5 stars)
-- Written comments
+### User Management
+- Secure user registration and authentication using Passport.js
+- Session-based authentication with express-session
+- Password hashing with passport-local-mongoose
+- Role-based authorization (guests and hosts)
+- Protected routes with middleware
+
+### Property Listings
+- Complete CRUD operations for property listings
+- 10 property categories: Trending, Iconic Cities, Nature, Beaches, Mountains, Swimming Pools, Castles, Camping, Ski Resorts, Vineyards
+- Image upload and management via Cloudinary
+- Advanced search functionality by title, location, or country
+- Category-based filtering
+- Detailed property information including rooms, max guests, and policies
+
+### Booking System
+- Interactive calendar widget with visual date selection
+- Real-time availability checking to prevent double bookings
+- Dynamic pricing engine with multiple factors:
+  - Weekend surcharge (20%)
+  - Seasonal pricing (15%)
+  - Early bird discount (10% for 30+ days advance)
+  - Last-minute discount (15% within 3 days)
+  - Long-term stay discount (25% for 28+ nights)
+  - Optional travel insurance (5%)
+- Three refund policies: Flexible, Moderate, and Strict
+- Split payment support for group bookings
+- Booking management dashboard with status tracking
+- Email notifications for booking confirmations
+
+### Review System
+- Star rating system (1-5 stars)
+- Written review comments
 - Dynamic average rating calculation
 - Review count display
-- Author attribution with timestamps
+- Author attribution and timestamps
+- Delete own reviews functionality
 
-### 🗺️ Interactive Maps
-- Leaflet.js integration
+### Interactive Maps
+- Leaflet.js integration for property location display
 - Geocoding with Nominatim API
-- Custom markers with home icons
-- Approximate location display with circle overlay
+- Custom markers with property icons
+- Approximate location display with radius overlay
 - Interactive zoom and pan controls
 
-### 🎨 Modern UI/UX
-- Responsive design (mobile-friendly)
-- Smooth animations and transitions
-- Card hover effects and image zoom
+### User Interface
+- Responsive design optimized for mobile and desktop
+- Modern CSS animations and transitions
 - Sticky booking widget on desktop
-- Scroll animations and lazy loading
-- Button ripple effects
-- Gradient backgrounds and custom icons
-
-### 📊 Data Management
-- MongoDB Atlas integration
-- Seed scripts for 50 diverse listings
-- Automated review generation (5-8 per listing)
-- Cascading delete operations
-- Joi validation schemas
+- Card hover effects and image zoom
+- Lazy loading for images
+- Smooth scrolling and scroll-to-top button
+- Professional gradient color scheme
 
 ---
 
-## ⚙️ Technologies Used
+## Technology Stack
 
 ### Backend
-- **Node.js** - JavaScript runtime
+- **Node.js** - JavaScript runtime environment
 - **Express.js** - Web application framework
 - **MongoDB** - NoSQL database
-- **Mongoose** - MongoDB ODM
+- **Mongoose** - MongoDB object modeling
 - **Passport.js** - Authentication middleware
-- **Express-session** - Session management
-- **Joi** - Data validation
+- **Joi** - Schema validation
+- **Nodemailer** - Email service integration
 
 ### Frontend
-- **EJS** - Templating engine
+- **EJS** - Embedded JavaScript templating
 - **Bootstrap 5** - CSS framework
 - **Font Awesome** - Icon library
 - **Leaflet.js** - Interactive maps
-- **Custom CSS** - Modern animations and effects
+- **Custom CSS** - Animations and styling
 
 ### Cloud Services
-- **MongoDB Atlas** - Cloud database
+- **MongoDB Atlas** - Cloud database hosting
 - **Cloudinary** - Image storage and optimization
+- **Render** - Application deployment
 
 ### Development Tools
-- **Method-Override** - HTTP verb support
 - **Multer** - File upload handling
+- **Method-Override** - HTTP verb support
 - **Connect-Flash** - Flash messages
-- **Dotenv** - Environment variables
+- **Dotenv** - Environment variable management
 
 ---
 
-## 🚀 Installation and Setup
+## Installation
 
 ### Prerequisites
-- Node.js (v14 or higher)
+- Node.js (v14.0.0 or higher)
 - MongoDB Atlas account
 - Cloudinary account
+- Gmail account (for email notifications)
 
-### Steps
+### Setup Instructions
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/WanderLust.git
-   cd WanderLust
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables**
-   
-   Create a `.env` file in the root directory:
-   ```env
-   ATLASDB_URL=your_mongodb_atlas_connection_string
-   SECRET=your_session_secret
-   CLOUD_NAME=your_cloudinary_cloud_name
-   CLOUD_API_KEY=your_cloudinary_api_key
-   CLOUD_API_SECRET=your_cloudinary_api_secret
-   ```
-
-4. **Seed the database (optional)**
-   ```bash
-   node init/index.js
-   node init2/index.js
-   ```
-
-5. **Run the application**
-   ```bash
-   node app.js
-   ```
-
-6. **Access the application**
-   
-   Open your browser and navigate to:
-   ```
-   http://localhost:8080
-   ```
-
----
-
-## 📁 Project Structure
-
-```
-WanderLust/
-├── controllers/        # Route controllers
-│   ├── bookings.js
-│   ├── listings.js
-│   ├── reviews.js
-│   └── users.js
-├── models/            # Mongoose schemas
-│   ├── booking.js
-│   ├── listing.js
-│   ├── review.js
-│   └── user.js
-├── routes/            # Express routes
-├── views/             # EJS templates
-│   ├── bookings/
-│   ├── listings/
-│   ├── users/
-│   └── layouts/
-├── public/            # Static assets
-│   ├── css/
-│   ├── js/
-│   └── images/
-├── utils/             # Utility functions
-│   ├── pricingCalculator.js
-│   ├── refundCalculator.js
-│   └── ExpressError.js
-├── middleware/        # Custom middleware
-├── schemas/           # Joi validation schemas
-├── init/              # Database seeding (listings)
-├── init2/             # Database seeding (reviews)
-├── app.js             # Main application file
-└── .env               # Environment variables
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/wanderlust.git
+cd wanderlust
 ```
 
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Create a `.env` file in the root directory (see [Environment Variables](#environment-variables))
+
+4. Seed the database (optional)
+```bash
+node init/index.js
+node init2/index.js
+```
+
+5. Start the application
+```bash
+node app.js
+```
+
+6. Access the application at `http://localhost:8080`
+
 ---
 
-## 📖 Documentation
+## Environment Variables
 
-For detailed feature documentation and future scope, see:
-- [FEATURES_AND_FUTURE_SCOPE.md](FEATURES_AND_FUTURE_SCOPE.md) - Complete feature list and enhancement ideas
-- [BOOKING_SYSTEM_DOCUMENTATION.md](BOOKING_SYSTEM_DOCUMENTATION.md) - Booking system details
-- [TEST_SCENARIOS.md](TEST_SCENARIOS.md) - Testing scenarios
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# MongoDB Atlas Connection
+ATLASDB_URL=mongodb+srv://username:password@cluster.mongodb.net/wanderlust?retryWrites=true&w=majority
+
+# Session Secret
+SECRET=your_random_secret_key_here
+
+# Cloudinary Configuration
+CLOUD_NAME=your_cloudinary_cloud_name
+CLOUD_API_KEY=your_cloudinary_api_key
+CLOUD_API_SECRET=your_cloudinary_api_secret
+
+# Email Configuration (Gmail)
+EMAIL_USER=your.email@gmail.com
+EMAIL_PASS=your_gmail_app_password
+EMAIL_FROM=WanderLust <your.email@gmail.com>
+```
+
+**Note:** For Gmail, you need to generate an App Password from your Google Account settings with 2-Step Verification enabled.
 
 ---
 
-## 🎯 Usage
+## Database Seeding
+
+The project includes seed scripts to populate the database with sample data:
+
+### Seed Listings (50 properties)
+```bash
+node init/index.js
+```
+
+This creates 50 diverse property listings across all 10 categories with realistic data including:
+- Property details (title, description, location, price)
+- Images from Unsplash
+- Various pricing ranges (₹480 - ₹10,000)
+- Different refund policies and booking settings
+
+### Seed Reviews (5-8 per listing)
+```bash
+node init2/index.js
+```
+
+This generates authentic reviews for each listing with:
+- Random ratings (3-5 stars)
+- Diverse review comments
+- Proper author attribution
+
+---
+
+## Project Structure
+
+```
+wanderlust/
+├── controllers/           # Business logic
+│   ├── bookings.js       # Booking operations
+│   ├── listings.js       # Listing CRUD
+│   ├── reviews.js        # Review operations
+│   └── users.js          # Authentication
+├── models/               # Database schemas
+│   ├── booking.js        # Booking model
+│   ├── listing.js        # Listing model
+│   ├── review.js         # Review model
+│   └── user.js           # User model
+├── routes/               # API routes
+│   ├── booking.js        # Booking routes
+│   ├── listing.js        # Listing routes
+│   ├── review.js         # Review routes
+│   └── user.js           # Auth routes
+├── views/                # EJS templates
+│   ├── bookings/         # Booking views
+│   ├── listings/         # Listing views
+│   ├── users/            # User views
+│   ├── includes/         # Partials
+│   └── layouts/          # Layout templates
+├── public/               # Static files
+│   ├── css/              # Stylesheets
+│   ├── js/               # Client-side scripts
+│   └── images/           # Static images
+├── utils/                # Utility functions
+│   ├── sendEmail.js      # Email service
+│   ├── pricingCalculator.js  # Pricing logic
+│   ├── refundCalculator.js   # Refund logic
+│   ├── ExpressError.js   # Error handling
+│   └── wrapAsync.js      # Async wrapper
+├── middleware/           # Custom middleware
+│   ├── bookingMiddleware.js  # Booking auth
+│   └── middleware.js     # General middleware
+├── schemas/              # Joi validation
+│   ├── bookingSchema.js  # Booking validation
+│   └── schema.js         # Listing/review validation
+├── init/                 # Database seeding
+│   ├── data.js           # Listing data
+│   └── index.js          # Seed script
+├── init2/                # Review seeding
+│   ├── reviewData.js     # Review data
+│   └── index.js          # Seed script
+├── app.js                # Application entry point
+├── cloudConfig.js        # Cloudinary setup
+├── package.json          # Dependencies
+└── .env                  # Environment variables
+```
+
+---
+
+## Usage
 
 ### For Guests
-1. **Browse Listings** - Explore properties by category or search
-2. **View Details** - See property info, reviews, and location on map
-3. **Book Property** - Select dates, guests, and complete booking
-4. **Manage Bookings** - View all bookings (upcoming/past) in "My Bookings"
-5. **Leave Reviews** - Rate and review properties after your stay
+
+1. **Browse Properties**
+   - View all available listings on the homepage
+   - Filter by category (Trending, Beaches, Mountains, etc.)
+   - Search by location or property name
+
+2. **View Property Details**
+   - See detailed information, photos, and amenities
+   - Check reviews and average ratings
+   - View property location on interactive map
+
+3. **Make a Booking**
+   - Select check-in and check-out dates using the calendar
+   - Choose number of guests
+   - View real-time price calculation with breakdown
+   - Add optional travel insurance
+   - Receive email confirmation
+
+4. **Manage Bookings**
+   - View all bookings in "My Bookings" section
+   - Filter by All, Upcoming, or Past bookings
+   - View detailed booking information
+   - Cancel bookings with refund calculation
+
+5. **Leave Reviews**
+   - Rate properties after your stay (1-5 stars)
+   - Write detailed review comments
+   - View and delete your own reviews
 
 ### For Hosts
-1. **Create Listing** - Add new property with details and images
-2. **Manage Properties** - Edit or delete your listings
-3. **View Bookings** - See all bookings for your properties
-4. **Respond to Reviews** - Engage with guest feedback
+
+1. **Create Listings**
+   - Add new property with detailed information
+   - Upload property images
+   - Set pricing and availability
+   - Choose refund policy
+
+2. **Manage Properties**
+   - Edit listing details and images
+   - Update pricing and policies
+   - Delete listings
+
+3. **View Bookings**
+   - See all bookings for your properties
+   - Track booking status and payments
 
 ---
 
-## 🔒 Security Features
+## API Endpoints
 
-- Password hashing with passport-local-mongoose
-- Session encryption
+### Authentication
+- `GET /signup` - User registration page
+- `POST /signup` - Create new user account
+- `GET /login` - Login page
+- `POST /login` - Authenticate user
+- `GET /logout` - Logout user
+
+### Listings
+- `GET /listings` - View all listings
+- `GET /listings/new` - Create listing form
+- `POST /listings` - Create new listing
+- `GET /listings/:id` - View listing details
+- `GET /listings/:id/edit` - Edit listing form
+- `PUT /listings/:id` - Update listing
+- `DELETE /listings/:id` - Delete listing
+
+### Reviews
+- `POST /listings/:id/reviews` - Create review
+- `DELETE /listings/:id/reviews/:reviewId` - Delete review
+
+### Bookings
+- `GET /bookings` - View user bookings
+- `POST /listings/:id/bookings` - Create booking
+- `GET /bookings/:id` - View booking details
+- `GET /listings/:id/calendar` - Get booking calendar data
+- `DELETE /bookings/:id` - Cancel booking
+
+---
+
+## Security
+
+### Authentication & Authorization
+- Passport.js for secure authentication
+- Session-based user management
+- Password hashing using bcrypt
+- Protected routes with middleware
+- Owner-based authorization for listings and reviews
+
+### Data Validation
+- Server-side validation using Joi schemas
+- Client-side form validation
+- Input sanitization to prevent injection attacks
+- File upload restrictions and validation
+
+### Security Best Practices
+- Environment variables for sensitive data
 - CSRF protection via method-override
-- Input sanitization with Joi
-- Authorization checks on all protected routes
-- Environment variable protection
+- Secure session configuration
+- HTTP-only cookies
+- Error handling without exposing sensitive information
 
 ---
 
-## 🌟 Highlights
+## Contributing
 
-- **50 Pre-loaded Listings** across 10 categories
-- **Dynamic Pricing** with multiple discount types
-- **Real-time Availability** checking
-- **Interactive Maps** with geocoding
-- **Responsive Design** for all devices
-- **Modern Animations** and smooth transitions
-- **Complete Booking Flow** from search to confirmation
+Contributions are welcome! Please follow these steps:
 
----
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
+Please ensure your code follows the existing style and includes appropriate tests.
 
 ---
 
-## 👨‍💻 Author
+## License
 
-Created with ❤️ for learning and demonstration purposes.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- Inspired by Airbnb's user experience
-- Built as part of a web development learning journey
-- Special thanks to the open-source community
+- Inspired by Airbnb's user experience and functionality
+- Built as a comprehensive full-stack web development project
+- Property images sourced from Unsplash
+- Map tiles provided by OpenStreetMap
+- Icons from Font Awesome
+
+---
+
+## Contact
+
+For questions or support, please open an issue in the GitHub repository.
+
+**Project Link:** [https://github.com/yourusername/wanderlust](https://github.com/yourusername/wanderlust)
+
+**Live Demo:** [https://nomadnest-alun.onrender.com/listings](https://nomadnest-alun.onrender.com/listings)
