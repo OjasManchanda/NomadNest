@@ -1,4 +1,4 @@
-# WanderLust (NomadNest)
+# NomadNest
 
 A full-stack property rental platform built with Node.js, Express, MongoDB, and EJS. This application replicates core Airbnb functionality with features including user authentication, property listings, advanced booking system with dynamic pricing, reviews, and interactive maps.
 
