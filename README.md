@@ -377,12 +377,6 @@ Please ensure your code follows the existing style and includes appropriate test
 
 ---
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
 ## Acknowledgments
 
 - Inspired by Airbnb's user experience and functionality
@@ -396,7 +390,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Contact
 
 For questions or support, please open an issue in the GitHub repository.
-
-**Project Link:** [https://github.com/yourusername/wanderlust](https://github.com/yourusername/wanderlust)
 
 **Live Demo:** [https://nomadnest-alun.onrender.com/listings](https://nomadnest-alun.onrender.com/listings)
